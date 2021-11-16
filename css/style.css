@@ -695,6 +695,7 @@ video {
 
 .badge-base iframe {
   margin: 0 auto;
+  width: 255px !important;
 }
 
 
