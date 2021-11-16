@@ -693,5 +693,8 @@ video {
     width: 100%;
 }
 
+.badge-base iframe {
+  margin: 0 auto;
+}
 
 
