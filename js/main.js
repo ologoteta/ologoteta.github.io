@@ -79,7 +79,7 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      strings: ["Oscar Logoteta", "Author", "Product manager", "Product owner", "UX lead"],
+      strings: ["Oscar Logoteta", "Author", "Product manager", "UX lead"],
       typeSpeed: 80,
       loop: true,
     });
