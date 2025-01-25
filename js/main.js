@@ -79,8 +79,8 @@ $(document).ready(function() {
 
   $(function() {
     typed.typed({
-      strings: ["Oscar Logoteta", "Author", "Product manager", "UX lead"],
-      typeSpeed: 80,
+      strings: ["Oscar", "product lead", "UX lead", "author],
+      typeSpeed: 60,
       loop: true,
     });
   });
