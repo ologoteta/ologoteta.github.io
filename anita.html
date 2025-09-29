@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Drawing App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #f0f0f0;
+            touch-action: none;
+        }
+        
+        #canvas {
+            display: block;
+            background: white;
+            cursor: crosshair;
+            touch-action: none;
+        }
+        
+        #toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: 2px solid #333;
+            background: white;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        
+        .btn:active {
+            background: #e0e0e0;
+        }
+        
+        .btn.active {
+            background: #007AFF;
+            color: white;
+            border-color: #007AFF;
+        }
+        
+        #colorPicker {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #brushSize {
+            width: 100px;
+        }
+        
+        .size-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .tool-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007AFF;
+            padding-bottom: 10px;
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007AFF;
+        }
+        
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            border: none;
+            background: none;
+            padding: 0 10px;
+        }
+        
+        .saved-item {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            background: #f9f9f9;
+        }
+        
+        .saved-preview {
+            width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 5px;
+            background: white;
+            margin-bottom: 10px;
+        }
+        
+        .saved-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .saved-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .small-btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #007AFF;
+            background: white;
+            color: #007AFF;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .small-btn.delete {
+            border-color: #FF3B30;
+            color: #FF3B30;
+        }
+        
+        .small-btn:active {
+            opacity: 0.7;
+        }
+        
+        #saveNameInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #007AFF;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <div class="tool-group">
+            <button class="btn active" id="penBtn">✏️ Penna</button>
+            <button class="btn" id="eraserBtn">🧹 Gomma</button>
+        </div>
+        
+        <div class="tool-group">
+            <input type="color" id="colorPicker" value="#000000">
+        </div>
+        
+        <div class="tool-group">
+            <span class="size-label">Dimensione:</span>
+            <input type="range" id="brushSize" min="1" max="50" value="3">
+            <span class="size-label" id="sizeValue">3px</span>
+        </div>
+        
+        <div class="tool-group">
+            <button class="btn" id="newBtn">📄 Nuovo</button>
+            <button class="btn" id="clearBtn">🗑️ Cancella</button>
+            <button class="btn" id="undoBtn">↶ Annulla</button>
+            <button class="btn" id="saveBtn">💾 Salva</button>
+            <button class="btn" id="loadBtn">📂 Carica</button>
+        </div>
+    </div>
+    
+    <canvas id="canvas"></canvas>
+    
+    <div id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">Salva Disegno</div>
+                <button class="close-btn" id="closeModal">×</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var isDrawing = false;
+        var currentTool = 'pen';
+        var currentColor = '#000000';
+        var brushSize = 3;
+        var lastX = 0;
+        var lastY = 0;
+        var undoStack = [];
+        var maxUndoSteps = 20;
+        var modal = document.getElementById('modal');
+        
+        // Setup canvas
+        function resizeCanvas() {
+            var toolbar = document.getElementById('toolbar');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight - toolbar.offsetHeight;
+            canvas.style.marginTop = toolbar.offsetHeight + 'px';
+            
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            if (undoStack.length > 0) {
+                restoreFromDataURL(undoStack[undoStack.length - 1]);
+            }
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Save state for undo
+        function saveState() {
+            undoStack.push(canvas.toDataURL());
+            if (undoStack.length > maxUndoSteps) {
+                undoStack.shift();
+            }
+        }
+        
+        function restoreFromDataURL(dataURL) {
+            var img = new Image();
+            img.onload = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = dataURL;
+        }
+        
+        // Get coordinates
+        function getCoords(e) {
+            var rect = canvas.getBoundingClientRect();
+            var touch = e.touches ? e.touches[0] : e;
+            return {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+        }
+        
+        // Drawing functions
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            var coords = getCoords(e);
+            lastX = coords.x;
+            lastY = coords.y;
+            saveState();
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            
+            var coords = getCoords(e);
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(coords.x, coords.y);
+            
+            if (currentTool === 'pen') {
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize;
+                ctx.globalCompositeOperation = 'source-over';
+            } else if (currentTool === 'eraser') {
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'destination-out';
+            }
+            
+            ctx.stroke();
+            
+            lastX = coords.x;
+            lastY = coords.y;
+        }
+        
+        function stopDrawing(e) {
+            if (isDrawing) {
+                e.preventDefault();
+                isDrawing = false;
+            }
+        }
+        
+        // Touch events
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('touchcancel', stopDrawing);
+        
+        // Mouse events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+        
+        // Tool buttons
+        document.getElementById('penBtn').addEventListener('click', function() {
+            currentTool = 'pen';
+            this.classList.add('active');
+            document.getElementById('eraserBtn').classList.remove('active');
+        });
+        
+        document.getElementById('eraserBtn').addEventListener('click', function() {
+            currentTool = 'eraser';
+            this.classList.add('active');
+            document.getElementById('penBtn').classList.remove('active');
+        });
+        
+        // Color picker
+        document.getElementById('colorPicker').addEventListener('change', function() {
+            currentColor = this.value;
+            currentTool = 'pen';
+            document.getElementById('penBtn').classList.add('active');
+            document.getElementById('eraserBtn').classList.remove('active');
+        });
+        
+        // Brush size
+        document.getElementById('brushSize').addEventListener('input', function() {
+            brushSize = parseInt(this.value);
+            document.getElementById('sizeValue').textContent = brushSize + 'px';
+        });
+        
+        // New button
+        document.getElementById('newBtn').addEventListener('click', function() {
+            if (confirm('Vuoi creare un nuovo disegno? Il disegno corrente non sarà salvato se non lo hai già fatto.')) {
+                undoStack = [];
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        
+        // Clear button
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            if (confirm('Vuoi davvero cancellare tutto?')) {
+                saveState();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        
+        // Undo button
+        document.getElementById('undoBtn').addEventListener('click', function() {
+            if (undoStack.length > 1) {
+                undoStack.pop();
+                restoreFromDataURL(undoStack[undoStack.length - 1]);
+            } else if (undoStack.length === 1) {
+                undoStack.pop();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        
+        // Modal functions
+        function openModal() {
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            modal.classList.remove('show');
+        }
+        
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Save to localStorage
+        function getAllDrawings() {
+            var drawings = window.localStorage.getItem('drawings');
+            return drawings ? JSON.parse(drawings) : [];
+        }
+        
+        function saveAllDrawings(drawings) {
+            window.localStorage.setItem('drawings', JSON.stringify(drawings));
+        }
+        
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            var modalBody = document.getElementById('modalBody');
+            document.getElementById('modalTitle').textContent = 'Salva Disegno';
+            
+            modalBody.innerHTML = '<input type="text" id="saveNameInput" placeholder="Nome del disegno">' +
+                '<button class="btn" id="confirmSave">Salva</button>';
+            
+            openModal();
+            
+            document.getElementById('saveNameInput').focus();
+            
+            document.getElementById('confirmSave').addEventListener('click', function() {
+                var name = document.getElementById('saveNameInput').value.trim();
+                if (!name) {
+                    name = 'Disegno ' + new Date().toLocaleString('it-IT');
+                }
+                
+                var dataURL = canvas.toDataURL('image/png');
+                var drawings = getAllDrawings();
+                
+                drawings.push({
+                    id: Date.now(),
+                    name: name,
+                    data: dataURL,
+                    date: new Date().toISOString()
+                });
+                
+                saveAllDrawings(drawings);
+                alert('Disegno salvato: ' + name);
+                closeModal();
+            });
+        });
+        
+        // Load from localStorage
+        document.getElementById('loadBtn').addEventListener('click', function() {
+            var drawings = getAllDrawings();
+            var modalBody = document.getElementById('modalBody');
+            document.getElementById('modalTitle').textContent = 'I Miei Disegni';
+            
+            if (drawings.length === 0) {
+                modalBody.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">Nessun disegno salvato</p>';
+            } else {
+                var html = '';
+                drawings.reverse().forEach(function(drawing) {
+                    var date = new Date(drawing.date).toLocaleString('it-IT');
+                    html += '<div class="saved-item">' +
+                        '<img src="' + drawing.data + '" class="saved-preview">' +
+                        '<div class="saved-info"><strong>' + drawing.name + '</strong><br>' + date + '</div>' +
+                        '<div class="saved-actions">' +
+                        '<button class="small-btn load-drawing" data-id="' + drawing.id + '">Carica</button>' +
+                        '<button class="small-btn download-drawing" data-id="' + drawing.id + '">Scarica</button>' +
+                        '<button class="small-btn delete delete-drawing" data-id="' + drawing.id + '">Elimina</button>' +
+                        '</div></div>';
+                });
+                modalBody.innerHTML = html;
+                
+                // Load drawing
+                var loadBtns = modalBody.querySelectorAll('.load-drawing');
+                for (var i = 0; i < loadBtns.length; i++) {
+                    loadBtns[i].addEventListener('click', function() {
+                        var id = parseInt(this.getAttribute('data-id'));
+                        var drawings = getAllDrawings();
+                        var drawing = drawings.find(function(d) { return d.id === id; });
+                        if (drawing) {
+                            restoreFromDataURL(drawing.data);
+                            saveState();
+                            closeModal();
+                        }
+                    });
+                }
+                
+                // Download drawing
+                var downloadBtns = modalBody.querySelectorAll('.download-drawing');
+                for (var i = 0; i < downloadBtns.length; i++) {
+                    downloadBtns[i].addEventListener('click', function() {
+                        var id = parseInt(this.getAttribute('data-id'));
+                        var drawings = getAllDrawings();
+                        var drawing = drawings.find(function(d) { return d.id === id; });
+                        if (drawing) {
+                            var link = document.createElement('a');
+                            link.download = drawing.name + '.png';
+                            link.href = drawing.data;
+                            link.click();
+                        }
+                    });
+                }
+                
+                // Delete drawing
+                var deleteBtns = modalBody.querySelectorAll('.delete-drawing');
+                for (var i = 0; i < deleteBtns.length; i++) {
+                    deleteBtns[i].addEventListener('click', function() {
+                        if (confirm('Vuoi eliminare questo disegno?')) {
+                            var id = parseInt(this.getAttribute('data-id'));
+                            var drawings = getAllDrawings();
+                            drawings = drawings.filter(function(d) { return d.id !== id; });
+                            saveAllDrawings(drawings);
+                            document.getElementById('loadBtn').click();
+                        }
+                    });
+                }
+            }
+            
+            openModal();
+        });
+        
+        // Prevent scrolling on iOS
+        document.body.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
