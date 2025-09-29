@@ -35,25 +35,24 @@
             left: 0;
             right: 0;
             background: white;
-            padding: 8px;
+            padding: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             z-index: 1000;
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            align-items: center;
+            justify-content: center;
         }
         
         .btn {
-            display: inline-block;
-            padding: 10px 12px;
-            margin: 2px;
+            padding: 8px 10px;
             border: 2px solid #333;
             background: white;
             border-radius: 5px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            vertical-align: middle;
+            flex-shrink: 0;
         }
         
         .btn:active {
@@ -67,15 +66,13 @@
         }
         
         .color-btn {
-            width: 35px;
-            height: 35px;
+            width: 30px;
+            height: 30px;
             padding: 0;
-            margin: 2px;
             border: 2px solid #333;
             border-radius: 5px;
             cursor: pointer;
-            display: inline-block;
-            vertical-align: middle;
+            flex-shrink: 0;
         }
         
         .color-btn.active {
@@ -84,8 +81,57 @@
         }
         
         .size-btn {
-            width: 45px;
-            padding: 8px;
+            min-width: 40px;
+            padding: 8px 6px;
+        }
+        
+        .divider {
+            width: 1px;
+            height: 25px;
+            background: #ccc;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 600px) {
+            .btn {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+            
+            .color-btn {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .size-btn {
+                min-width: 35px;
+                padding: 6px 4px;
+            }
+            
+            .divider {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            #toolbar {
+                padding: 3px;
+                gap: 2px;
+            }
+            
+            .btn {
+                padding: 5px 6px;
+                font-size: 10px;
+            }
+            
+            .color-btn {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .size-btn {
+                min-width: 32px;
+            }
         }
         
         #modal {
