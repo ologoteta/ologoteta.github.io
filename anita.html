@@ -16,11 +16,12 @@
         
         body {
             overflow: hidden;
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f7;
             touch-action: none;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
+            user-select: none;
         }
         
         #canvas {
@@ -29,109 +30,86 @@
             touch-action: none;
         }
         
-        #toolbar {
+        #sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            background: white;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            bottom: 0;
+            width: 60px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
             z-index: 1000;
             display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .tool-btn {
+            width: 44px;
+            height: 44px;
+            margin: 4px 0;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
         }
         
-        .btn {
-            padding: 8px 10px;
-            border: 2px solid #333;
-            background: white;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-            flex-shrink: 0;
+        .tool-btn:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.2);
         }
         
-        .btn:active {
-            background: #ddd;
-        }
-        
-        .btn.active {
+        .tool-btn.active {
             background: #007AFF;
-            color: white;
-            border-color: #007AFF;
+            box-shadow: 0 0 15px rgba(0,122,255,0.5);
+        }
+        
+        .tool-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
         }
         
         .color-btn {
-            width: 30px;
-            height: 30px;
-            padding: 0;
-            border: 2px solid #333;
-            border-radius: 5px;
+            width: 36px;
+            height: 36px;
+            margin: 3px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
             cursor: pointer;
-            flex-shrink: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .color-btn:active {
+            transform: scale(0.9);
         }
         
         .color-btn.active {
             border: 3px solid #FFD700;
-            border-style: double;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(255,215,0,0.6);
         }
         
         .size-btn {
-            min-width: 40px;
-            padding: 8px 6px;
+            width: 44px;
+            height: 44px;
+            font-size: 11px;
+            font-weight: bold;
+            color: white;
         }
         
         .divider {
-            width: 1px;
-            height: 25px;
-            background: #ccc;
-            flex-shrink: 0;
-        }
-        
-        @media (max-width: 600px) {
-            .btn {
-                padding: 6px 8px;
-                font-size: 11px;
-            }
-            
-            .color-btn {
-                width: 28px;
-                height: 28px;
-            }
-            
-            .size-btn {
-                min-width: 35px;
-                padding: 6px 4px;
-            }
-            
-            .divider {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            #toolbar {
-                padding: 3px;
-                gap: 2px;
-            }
-            
-            .btn {
-                padding: 5px 6px;
-                font-size: 10px;
-            }
-            
-            .color-btn {
-                width: 25px;
-                height: 25px;
-            }
-            
-            .size-btn {
-                min-width: 32px;
-            }
+            width: 80%;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 8px 0;
         }
         
         #modal {
@@ -184,6 +162,7 @@
             padding: 10px;
             margin: 10px 0;
             background: #f9f9f9;
+            border-radius: 8px;
         }
         
         .saved-preview {
@@ -199,55 +178,83 @@
             margin-bottom: 8px;
         }
         
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            background: #007AFF;
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 2px;
+        }
+        
+        .btn:active {
+            background: #0051D5;
+        }
+        
         #saveNameInput {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 2px solid #007AFF;
+            border-radius: 6px;
             font-size: 14px;
-        }
-        
-        .divider {
-            display: inline-block;
-            width: 1px;
-            height: 30px;
-            background: #ccc;
-            margin: 0 5px;
-            vertical-align: middle;
         }
     </style>
 </head>
 <body>
-    <div id="toolbar">
-        <button class="btn active" id="penBtn">Penna</button>
-        <button class="btn" id="eraserBtn">Gomma</button>
+    <div id="sidebar">
+        <!-- Tool: Pen -->
+        <button class="tool-btn active" id="penBtn" title="Penna">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        </button>
         
-        <span class="divider"></span>
+        <!-- Tool: Eraser -->
+        <button class="tool-btn" id="eraserBtn" title="Gomma">
+            <svg viewBox="0 0 24 24"><path d="M16.24 3.56l4.95 4.94c.78.79.78 2.05 0 2.84L12 20.53a4.008 4.008 0 0 1-5.66 0L2.81 17c-.78-.79-.78-2.05 0-2.84l10.6-10.6c.79-.78 2.05-.78 2.83 0M4.22 15.58l3.54 3.53c.78.79 2.04.79 2.83 0l3.53-3.53-6.36-6.36-3.54 3.53c-.78.79-.78 2.05 0 2.83z"/></svg>
+        </button>
         
-        <button class="color-btn active" style="background:#000000" data-color="#000000"></button>
-        <button class="color-btn" style="background:#FF0000" data-color="#FF0000"></button>
-        <button class="color-btn" style="background:#00FF00" data-color="#00FF00"></button>
-        <button class="color-btn" style="background:#0000FF" data-color="#0000FF"></button>
-        <button class="color-btn" style="background:#FFFF00" data-color="#FFFF00"></button>
-        <button class="color-btn" style="background:#FF00FF" data-color="#FF00FF"></button>
-        <button class="color-btn" style="background:#00FFFF" data-color="#00FFFF"></button>
-        <button class="color-btn" style="background:#FFA500" data-color="#FFA500"></button>
-        <button class="color-btn" style="background:#8B4513" data-color="#8B4513"></button>
+        <div class="divider"></div>
         
-        <span class="divider"></span>
+        <!-- Colors -->
+        <button class="color-btn active" style="background:#000000" data-color="#000000" title="Nero"></button>
+        <button class="color-btn" style="background:#FF0000" data-color="#FF0000" title="Rosso"></button>
+        <button class="color-btn" style="background:#00FF00" data-color="#00FF00" title="Verde"></button>
+        <button class="color-btn" style="background:#0000FF" data-color="#0000FF" title="Blu"></button>
+        <button class="color-btn" style="background:#FFFF00" data-color="#FFFF00" title="Giallo"></button>
+        <button class="color-btn" style="background:#FF00FF" data-color="#FF00FF" title="Magenta"></button>
+        <button class="color-btn" style="background:#00FFFF" data-color="#00FFFF" title="Ciano"></button>
+        <button class="color-btn" style="background:#FFA500" data-color="#FFA500" title="Arancione"></button>
+        <button class="color-btn" style="background:#8B4513" data-color="#8B4513" title="Marrone"></button>
         
-        <button class="btn size-btn" data-size="2">XS</button>
-        <button class="btn size-btn active" data-size="4">S</button>
-        <button class="btn size-btn" data-size="8">M</button>
-        <button class="btn size-btn" data-size="15">L</button>
-        <button class="btn size-btn" data-size="25">XL</button>
+        <div class="divider"></div>
         
-        <span class="divider"></span>
+        <!-- Brush Sizes -->
+        <button class="tool-btn size-btn" data-size="2" title="XS">XS</button>
+        <button class="tool-btn size-btn active" data-size="4" title="S">S</button>
+        <button class="tool-btn size-btn" data-size="8" title="M">M</button>
+        <button class="tool-btn size-btn" data-size="15" title="L">L</button>
+        <button class="tool-btn size-btn" data-size="25" title="XL">XL</button>
         
-        <button class="btn" id="newBtn">Nuovo</button>
-        <button class="btn" id="undoBtn">Annulla</button>
-        <button class="btn" id="saveBtn">Salva</button>
-        <button class="btn" id="loadBtn">Carica</button>
+        <div class="divider"></div>
+        
+        <!-- Actions -->
+        <button class="tool-btn" id="undoBtn" title="Annulla">
+            <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+        </button>
+        
+        <button class="tool-btn" id="newBtn" title="Nuovo">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        </button>
+        
+        <button class="tool-btn" id="saveBtn" title="Salva">
+            <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        </button>
+        
+        <button class="tool-btn" id="loadBtn" title="Carica">
+            <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg>
+        </button>
     </div>
     
     <canvas id="canvas"></canvas>
@@ -269,19 +276,18 @@
         var currentTool = 'pen';
         var currentColor = '#000000';
         var brushSize = 4;
-        var lastX = 0;
-        var lastY = 0;
+        var points = [];
         var undoStack = [];
         var maxUndoSteps = 15;
         var modal = document.getElementById('modal');
         
         // Setup canvas
         function resizeCanvas() {
-            var toolbar = document.getElementById('toolbar');
-            var toolbarHeight = toolbar.offsetHeight;
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight - toolbarHeight;
-            canvas.style.marginTop = toolbarHeight + 'px';
+            var sidebar = document.getElementById('sidebar');
+            var sidebarWidth = sidebar.offsetWidth;
+            canvas.width = window.innerWidth - sidebarWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.marginLeft = sidebarWidth + 'px';
             
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
@@ -335,25 +341,9 @@
             };
         }
         
-        // Drawing functions
-        function startDrawing(e) {
-            e.preventDefault();
-            isDrawing = true;
-            var coords = getCoords(e);
-            lastX = coords.x;
-            lastY = coords.y;
-            saveState();
-        }
-        
-        function draw(e) {
-            if (!isDrawing) return;
-            e.preventDefault();
-            
-            var coords = getCoords(e);
-            
-            ctx.beginPath();
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(coords.x, coords.y);
+        // Smooth drawing with quadratic curves
+        function drawSmooth() {
+            if (points.length < 2) return;
             
             if (currentTool === 'pen') {
                 ctx.strokeStyle = currentColor;
@@ -365,16 +355,49 @@
                 ctx.globalCompositeOperation = 'destination-out';
             }
             
-            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
             
-            lastX = coords.x;
-            lastY = coords.y;
+            for (var i = 1; i < points.length - 1; i++) {
+                var xc = (points[i].x + points[i + 1].x) / 2;
+                var yc = (points[i].y + points[i + 1].y) / 2;
+                ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+            }
+            
+            if (points.length > 1) {
+                var last = points[points.length - 1];
+                var prev = points[points.length - 2];
+                ctx.quadraticCurveTo(prev.x, prev.y, last.x, last.y);
+            }
+            
+            ctx.stroke();
+        }
+        
+        // Drawing functions
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            points = [];
+            var coords = getCoords(e);
+            points.push(coords);
+            saveState();
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            
+            var coords = getCoords(e);
+            points.push(coords);
+            
+            drawSmooth();
         }
         
         function stopDrawing(e) {
             if (isDrawing) {
                 e.preventDefault();
                 isDrawing = false;
+                points = [];
             }
         }
         
@@ -392,14 +415,14 @@
         // Tool buttons
         document.getElementById('penBtn').addEventListener('click', function() {
             currentTool = 'pen';
-            this.className = 'btn active';
-            document.getElementById('eraserBtn').className = 'btn';
+            this.className = 'tool-btn active';
+            document.getElementById('eraserBtn').className = 'tool-btn';
         });
         
         document.getElementById('eraserBtn').addEventListener('click', function() {
             currentTool = 'eraser';
-            this.className = 'btn active';
-            document.getElementById('penBtn').className = 'btn';
+            this.className = 'tool-btn active';
+            document.getElementById('penBtn').className = 'tool-btn';
         });
         
         // Color buttons
@@ -408,8 +431,8 @@
             colorBtns[i].addEventListener('click', function() {
                 currentColor = this.getAttribute('data-color');
                 currentTool = 'pen';
-                document.getElementById('penBtn').className = 'btn active';
-                document.getElementById('eraserBtn').className = 'btn';
+                document.getElementById('penBtn').className = 'tool-btn active';
+                document.getElementById('eraserBtn').className = 'tool-btn';
                 
                 var allColorBtns = document.querySelectorAll('.color-btn');
                 for (var j = 0; j < allColorBtns.length; j++) {
@@ -427,9 +450,9 @@
                 
                 var allSizeBtns = document.querySelectorAll('.size-btn');
                 for (var j = 0; j < allSizeBtns.length; j++) {
-                    allSizeBtns[j].className = 'btn size-btn';
+                    allSizeBtns[j].className = 'tool-btn size-btn';
                 }
-                this.className = 'btn size-btn active';
+                this.className = 'tool-btn size-btn active';
             });
         }
         
