@@ -201,6 +201,40 @@
             border-radius: 6px;
             font-size: 14px;
         }
+        
+        #colorPalette {
+            display: none;
+            position: fixed;
+            left: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 1500;
+        }
+        
+        #colorPalette.show {
+            display: block;
+        }
+        
+        #colorPalette .color-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .current-color-indicator {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 3px solid white;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -217,16 +251,11 @@
         
         <div class="divider"></div>
         
-        <!-- Colors -->
-        <button class="color-btn active" style="background:#000000" data-color="#000000" title="Nero"></button>
-        <button class="color-btn" style="background:#FF0000" data-color="#FF0000" title="Rosso"></button>
-        <button class="color-btn" style="background:#00FF00" data-color="#00FF00" title="Verde"></button>
-        <button class="color-btn" style="background:#0000FF" data-color="#0000FF" title="Blu"></button>
-        <button class="color-btn" style="background:#FFFF00" data-color="#FFFF00" title="Giallo"></button>
-        <button class="color-btn" style="background:#FF00FF" data-color="#FF00FF" title="Magenta"></button>
-        <button class="color-btn" style="background:#00FFFF" data-color="#00FFFF" title="Ciano"></button>
-        <button class="color-btn" style="background:#FFA500" data-color="#FFA500" title="Arancione"></button>
-        <button class="color-btn" style="background:#8B4513" data-color="#8B4513" title="Marrone"></button>
+        <!-- Color Palette Button -->
+        <button class="tool-btn" id="colorPaletteBtn" title="Colori" style="position:relative;">
+            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            <span class="current-color-indicator" id="currentColorIndicator" style="background:#000000"></span>
+        </button>
         
         <div class="divider"></div>
         
@@ -255,6 +284,21 @@
         <button class="tool-btn" id="loadBtn" title="Carica">
             <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg>
         </button>
+    </div>
+    
+    <!-- Color Palette Popup -->
+    <div id="colorPalette">
+        <div class="color-grid">
+            <button class="color-btn active" style="background:#000000" data-color="#000000" title="Nero"></button>
+            <button class="color-btn" style="background:#FF0000" data-color="#FF0000" title="Rosso"></button>
+            <button class="color-btn" style="background:#00FF00" data-color="#00FF00" title="Verde"></button>
+            <button class="color-btn" style="background:#0000FF" data-color="#0000FF" title="Blu"></button>
+            <button class="color-btn" style="background:#FFFF00" data-color="#FFFF00" title="Giallo"></button>
+            <button class="color-btn" style="background:#FF00FF" data-color="#FF00FF" title="Magenta"></button>
+            <button class="color-btn" style="background:#00FFFF" data-color="#00FFFF" title="Ciano"></button>
+            <button class="color-btn" style="background:#FFA500" data-color="#FFA500" title="Arancione"></button>
+            <button class="color-btn" style="background:#8B4513" data-color="#8B4513" title="Marrone"></button>
+        </div>
     </div>
     
     <canvas id="canvas"></canvas>
@@ -425,8 +469,30 @@
             document.getElementById('penBtn').className = 'tool-btn';
         });
         
-        // Color buttons
-        var colorBtns = document.querySelectorAll('.color-btn');
+        // Color Palette
+        var colorPalette = document.getElementById('colorPalette');
+        var colorPaletteBtn = document.getElementById('colorPaletteBtn');
+        var currentColorIndicator = document.getElementById('currentColorIndicator');
+        
+        // Toggle color palette
+        colorPaletteBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (colorPalette.className === 'show') {
+                colorPalette.className = '';
+            } else {
+                colorPalette.className = 'show';
+            }
+        });
+        
+        // Close palette when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target !== colorPaletteBtn && !colorPalette.contains(e.target)) {
+                colorPalette.className = '';
+            }
+        });
+        
+        // Color selection
+        var colorBtns = document.querySelectorAll('#colorPalette .color-btn');
         for (var i = 0; i < colorBtns.length; i++) {
             colorBtns[i].addEventListener('click', function() {
                 currentColor = this.getAttribute('data-color');
@@ -434,11 +500,18 @@
                 document.getElementById('penBtn').className = 'tool-btn active';
                 document.getElementById('eraserBtn').className = 'tool-btn';
                 
-                var allColorBtns = document.querySelectorAll('.color-btn');
+                // Update color indicator
+                currentColorIndicator.style.background = currentColor;
+                
+                // Update active state
+                var allColorBtns = document.querySelectorAll('#colorPalette .color-btn');
                 for (var j = 0; j < allColorBtns.length; j++) {
                     allColorBtns[j].className = 'color-btn';
                 }
                 this.className = 'color-btn active';
+                
+                // Close palette
+                colorPalette.className = '';
             });
         }
         
