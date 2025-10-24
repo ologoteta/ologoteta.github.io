@@ -317,6 +317,11 @@
             <svg viewBox="0 0 24 24"><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z"/></svg>
         </button>
         
+        <!-- Tool: Gradient Fill -->
+        <button class="tool-btn" id="gradientFillBtn" title="Secchiello Sfumatura">
+            <svg viewBox="0 0 24 24"><path d="M11,9H13V6.5C13,5.47 13.5,4.47 14.21,3.73L15.64,2.29L17.05,3.71L15.62,5.14C15.22,5.54 15,6.09 15,6.67V9H17V11H15V13H17V15H15V17.33C15,17.91 15.22,18.46 15.62,18.86L17.05,20.29L15.64,21.71L14.21,20.27C13.5,19.53 13,18.53 13,17.5V15H11V17.5C11,18.53 10.5,19.53 9.79,20.27L8.36,21.71L6.95,20.29L8.38,18.86C8.78,18.46 9,17.91 9,17.33V15H7V13H9V11H7V9H9V6.67C9,6.09 8.78,5.54 8.38,5.14L6.95,3.71L8.36,2.29L9.79,3.73C10.5,4.47 11,5.47 11,6.5V9M11,11V13H13V11H11Z"/></svg>
+        </button>
+        
         <!-- Tool: Highlighter -->
         <button class="tool-btn" id="highlighterBtn" title="Evidenziatore">
             <svg viewBox="0 0 24 24"><path d="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31L11.69,24.64C12.5,25.44 13.76,25.44 14.54,24.64L20.5,18.68M2.86,15.93L1.78,17C1.37,17.42 1.37,18.08 1.78,18.5L4.5,21.22C4.92,21.63 5.58,21.63 6,21.22L7.07,20.14M7.5,18.5L5.5,20.5"/></svg>
@@ -326,7 +331,10 @@
         
         <!-- Color Palette Button -->
         <button class="tool-btn" id="colorPaletteBtn" title="Colori" style="position:relative; display:flex; align-items:center; justify-content:center;">
-            <span id="currentColorIndicator" style="width:32px; height:32px; border-radius:50%; background:#000000; border:3px solid rgba(255,255,255,0.8); box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
+            <div style="position:relative; width:36px; height:36px;">
+                <span id="primaryColorIndicator" style="width:26px; height:26px; border-radius:50%; background:#000000; border:3px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:2;"></span>
+                <span id="secondaryColorIndicator" style="width:20px; height:20px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; bottom:0; right:0; z-index:1;"></span>
+            </div>
         </button>
         
         <div class="divider"></div>
@@ -438,7 +446,10 @@
         var bgCtx = backgroundCanvas.getContext('2d');
         var isDrawing = false;
         var currentTool = 'pen';
-        var currentColor = '#000000';
+        var primaryColor = '#000000';
+        var secondaryColor = '#FFFFFF';
+        var activeColorSlot = 'primary';
+        var currentColor = primaryColor;
         var brushSize = 4;
         var points = [];
         var undoStack = [];
@@ -902,6 +913,104 @@
             ctx.putImageData(imageData, 0, 0);
         }
         
+        // Gradient flood fill algorithm
+        function gradientFloodFill(startX, startY, color1, color2) {
+            saveState();
+            
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var pixels = imageData.data;
+            var width = canvas.width;
+            var height = canvas.height;
+            
+            startX = Math.floor(startX);
+            startY = Math.floor(startY);
+            
+            if (startX < 0 || startX >= width || startY < 0 || startY >= height) return;
+            
+            var startPos = (startY * width + startX) * 4;
+            var startR = pixels[startPos];
+            var startG = pixels[startPos + 1];
+            var startB = pixels[startPos + 2];
+            var startA = pixels[startPos + 3];
+            
+            // Parse colors
+            function parseColor(color) {
+                if (color.indexOf('#') === 0) {
+                    var hex = color.substring(1);
+                    return {
+                        r: parseInt(hex.substring(0, 2), 16),
+                        g: parseInt(hex.substring(2, 4), 16),
+                        b: parseInt(hex.substring(4, 6), 16)
+                    };
+                }
+                return {r: 0, g: 0, b: 0};
+            }
+            
+            var c1 = parseColor(color1);
+            var c2 = parseColor(color2);
+            
+            var stack = [[startX, startY]];
+            var visited = {};
+            var filledPixels = [];
+            var minX = width, maxX = 0, minY = height, maxY = 0;
+            
+            function colorMatch(pos) {
+                return pixels[pos] === startR &&
+                       pixels[pos + 1] === startG &&
+                       pixels[pos + 2] === startB &&
+                       pixels[pos + 3] === startA;
+            }
+            
+            // Find all pixels to fill
+            while (stack.length > 0) {
+                var point = stack.pop();
+                var x = point[0];
+                var y = point[1];
+                var key = x + ',' + y;
+                
+                if (visited[key]) continue;
+                if (x < 0 || x >= width || y < 0 || y >= height) continue;
+                
+                var pos = (y * width + x) * 4;
+                
+                if (!colorMatch(pos)) continue;
+                
+                visited[key] = true;
+                filledPixels.push({x: x, y: y});
+                
+                minX = Math.min(minX, x);
+                maxX = Math.max(maxX, x);
+                minY = Math.min(minY, y);
+                maxY = Math.max(maxY, y);
+                
+                stack.push([x + 1, y]);
+                stack.push([x - 1, y]);
+                stack.push([x, y + 1]);
+                stack.push([x, y - 1]);
+            }
+            
+            // Apply gradient
+            var gradientWidth = maxX - minX;
+            var gradientHeight = maxY - minY;
+            var diagonal = Math.sqrt(gradientWidth * gradientWidth + gradientHeight * gradientHeight);
+            
+            for (var i = 0; i < filledPixels.length; i++) {
+                var pixel = filledPixels[i];
+                var dx = pixel.x - minX;
+                var dy = pixel.y - minY;
+                var distance = Math.sqrt(dx * dx + dy * dy);
+                var ratio = diagonal > 0 ? distance / diagonal : 0;
+                
+                var pos = (pixel.y * width + pixel.x) * 4;
+                pixels[pos] = Math.round(c1.r + (c2.r - c1.r) * ratio);
+                pixels[pos + 1] = Math.round(c1.g + (c2.g - c1.g) * ratio);
+                pixels[pos + 2] = Math.round(c1.b + (c2.b - c1.b) * ratio);
+                pixels[pos + 3] = 255;
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+        }
+        
         // Drawing functions
         var drawingStartState = null;
         
@@ -912,7 +1021,13 @@
             
             // Handle fill tool
             if (currentTool === 'fill') {
-                floodFill(coords.x, coords.y, currentColor);
+                floodFill(coords.x, coords.y, primaryColor);
+                return;
+            }
+            
+            // Handle gradient fill tool
+            if (currentTool === 'gradientFill') {
+                gradientFloodFill(coords.x, coords.y, primaryColor, secondaryColor);
                 return;
             }
             
@@ -1010,6 +1125,7 @@
             this.className = 'tool-btn active';
             document.getElementById('eraserBtn').className = 'tool-btn';
             document.getElementById('fillBtn').className = 'tool-btn';
+            document.getElementById('gradientFillBtn').className = 'tool-btn';
             document.getElementById('highlighterBtn').className = 'tool-btn';
         });
         
@@ -1018,6 +1134,7 @@
             this.className = 'tool-btn active';
             document.getElementById('penBtn').className = 'tool-btn';
             document.getElementById('fillBtn').className = 'tool-btn';
+            document.getElementById('gradientFillBtn').className = 'tool-btn';
             document.getElementById('highlighterBtn').className = 'tool-btn';
         });
         
@@ -1026,6 +1143,16 @@
             this.className = 'tool-btn active';
             document.getElementById('penBtn').className = 'tool-btn';
             document.getElementById('eraserBtn').className = 'tool-btn';
+            document.getElementById('gradientFillBtn').className = 'tool-btn';
+            document.getElementById('highlighterBtn').className = 'tool-btn';
+        });
+        
+        document.getElementById('gradientFillBtn').addEventListener('click', function() {
+            currentTool = 'gradientFill';
+            this.className = 'tool-btn active';
+            document.getElementById('penBtn').className = 'tool-btn';
+            document.getElementById('eraserBtn').className = 'tool-btn';
+            document.getElementById('fillBtn').className = 'tool-btn';
             document.getElementById('highlighterBtn').className = 'tool-btn';
         });
         
@@ -1035,12 +1162,31 @@
             document.getElementById('penBtn').className = 'tool-btn';
             document.getElementById('eraserBtn').className = 'tool-btn';
             document.getElementById('fillBtn').className = 'tool-btn';
+            document.getElementById('gradientFillBtn').className = 'tool-btn';
         });
         
         // Color Palette
         var colorPalette = document.getElementById('colorPalette');
         var colorPaletteBtn = document.getElementById('colorPaletteBtn');
-        var currentColorIndicator = document.getElementById('currentColorIndicator');
+        var primaryColorIndicator = document.getElementById('primaryColorIndicator');
+        var secondaryColorIndicator = document.getElementById('secondaryColorIndicator');
+        
+        // Switch between primary and secondary color
+        primaryColorIndicator.addEventListener('click', function(e) {
+            e.stopPropagation();
+            activeColorSlot = 'primary';
+            currentColor = primaryColor;
+            primaryColorIndicator.style.zIndex = '2';
+            secondaryColorIndicator.style.zIndex = '1';
+        });
+        
+        secondaryColorIndicator.addEventListener('click', function(e) {
+            e.stopPropagation();
+            activeColorSlot = 'secondary';
+            currentColor = secondaryColor;
+            primaryColorIndicator.style.zIndex = '1';
+            secondaryColorIndicator.style.zIndex = '2';
+        });
         
         // Toggle color palette
         colorPaletteBtn.addEventListener('click', function(e) {
@@ -1063,19 +1209,28 @@
         var colorBtns = document.querySelectorAll('#colorPalette .color-btn');
         for (var i = 0; i < colorBtns.length; i++) {
             colorBtns[i].addEventListener('click', function() {
-                currentColor = this.getAttribute('data-color');
+                var selectedColor = this.getAttribute('data-color');
                 
-                // Don't change tool if fill or highlighter are active
-                if (currentTool !== 'fill' && currentTool !== 'highlighter') {
+                // Apply to active color slot
+                if (activeColorSlot === 'primary') {
+                    primaryColor = selectedColor;
+                    primaryColorIndicator.style.background = primaryColor;
+                    currentColor = primaryColor;
+                } else {
+                    secondaryColor = selectedColor;
+                    secondaryColorIndicator.style.background = secondaryColor;
+                    currentColor = secondaryColor;
+                }
+                
+                // Don't change tool if fill, gradient fill, or highlighter are active
+                if (currentTool !== 'fill' && currentTool !== 'gradientFill' && currentTool !== 'highlighter') {
                     currentTool = 'pen';
                     document.getElementById('penBtn').className = 'tool-btn active';
                     document.getElementById('eraserBtn').className = 'tool-btn';
                     document.getElementById('fillBtn').className = 'tool-btn';
+                    document.getElementById('gradientFillBtn').className = 'tool-btn';
                     document.getElementById('highlighterBtn').className = 'tool-btn';
                 }
-                
-                // Update color indicator
-                currentColorIndicator.style.background = currentColor;
                 
                 // Update active state
                 var allColorBtns = document.querySelectorAll('#colorPalette .color-btn');
