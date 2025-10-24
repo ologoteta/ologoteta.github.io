@@ -71,14 +71,19 @@
         }
         
         .color-btn {
-            width: 36px;
-            height: 36px;
-            margin: 3px 0;
+            width: 40px;
+            height: 40px;
+            margin: 0;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .color-btn[data-color="#FFFFFF"] {
+            border: 2px solid rgba(0,0,0,0.3);
         }
         
         .color-btn:active {
@@ -87,8 +92,8 @@
         
         .color-btn.active {
             border: 3px solid #FFD700;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255,215,0,0.6);
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(255,215,0,0.8);
         }
         
         .size-btn {
@@ -203,10 +208,12 @@
             top: 50%;
             transform: translateY(-50%);
             background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            padding: 15px;
+            padding: 12px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             z-index: 1500;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         #colorPalette.show {
@@ -215,19 +222,8 @@
         
         #colorPalette .color-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        
-        .current-color-indicator {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 3px solid white;
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
         }
         
         .sidebar-spacer {
@@ -324,9 +320,8 @@
         <div class="divider"></div>
         
         <!-- Color Palette Button -->
-        <button class="tool-btn" id="colorPaletteBtn" title="Colori" style="position:relative;">
-            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-            <span class="current-color-indicator" id="currentColorIndicator" style="background:#000000"></span>
+        <button class="tool-btn" id="colorPaletteBtn" title="Colori" style="position:relative; display:flex; align-items:center; justify-content:center;">
+            <span id="currentColorIndicator" style="width:32px; height:32px; border-radius:50%; background:#000000; border:3px solid rgba(255,255,255,0.8); box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></span>
         </button>
         
         <div class="divider"></div>
@@ -374,15 +369,35 @@
     <!-- Color Palette Popup -->
     <div id="colorPalette">
         <div class="color-grid">
+            <!-- Row 1: Base colors -->
             <button class="color-btn active" style="background:#000000" data-color="#000000" title="Nero"></button>
+            <button class="color-btn" style="background:#FFFFFF" data-color="#FFFFFF" title="Bianco"></button>
+            <button class="color-btn" style="background:#808080" data-color="#808080" title="Grigio"></button>
+            <button class="color-btn" style="background:#C0C0C0" data-color="#C0C0C0" title="Argento"></button>
+            
+            <!-- Row 2: Primary colors -->
             <button class="color-btn" style="background:#FF0000" data-color="#FF0000" title="Rosso"></button>
-            <button class="color-btn" style="background:#00FF00" data-color="#00FF00" title="Verde"></button>
+            <button class="color-btn" style="background:#00FF00" data-color="#00FF00" title="Verde Lime"></button>
             <button class="color-btn" style="background:#0000FF" data-color="#0000FF" title="Blu"></button>
             <button class="color-btn" style="background:#FFFF00" data-color="#FFFF00" title="Giallo"></button>
+            
+            <!-- Row 3: Secondary colors -->
             <button class="color-btn" style="background:#FF00FF" data-color="#FF00FF" title="Magenta"></button>
             <button class="color-btn" style="background:#00FFFF" data-color="#00FFFF" title="Ciano"></button>
             <button class="color-btn" style="background:#FFA500" data-color="#FFA500" title="Arancione"></button>
+            <button class="color-btn" style="background:#800080" data-color="#800080" title="Viola"></button>
+            
+            <!-- Row 4: Earth tones -->
             <button class="color-btn" style="background:#8B4513" data-color="#8B4513" title="Marrone"></button>
+            <button class="color-btn" style="background:#D2691E" data-color="#D2691E" title="Cioccolato"></button>
+            <button class="color-btn" style="background:#F4A460" data-color="#F4A460" title="Beige"></button>
+            <button class="color-btn" style="background:#DEB887" data-color="#DEB887" title="Sabbia"></button>
+            
+            <!-- Row 5: Additional colors -->
+            <button class="color-btn" style="background:#FF1493" data-color="#FF1493" title="Rosa"></button>
+            <button class="color-btn" style="background:#00CED1" data-color="#00CED1" title="Turchese"></button>
+            <button class="color-btn" style="background:#9370DB" data-color="#9370DB" title="Lavanda"></button>
+            <button class="color-btn" style="background:#32CD32" data-color="#32CD32" title="Verde"></button>
         </div>
     </div>
     
