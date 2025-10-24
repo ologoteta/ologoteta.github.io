@@ -612,7 +612,7 @@
             lastDrawnIndex = Math.max(0, points.length - 2);
         }
         
-        // Smooth the collected points using very aggressive averaging
+        // Smooth the collected points with moderate averaging
         function smoothPoints(pts, iterations) {
             if (pts.length < 3) return pts;
             
@@ -624,17 +624,16 @@
                 // Keep first point
                 smoothed.push(source[0]);
                 
-                // Average middle points with very wide window for extreme smoothing
+                // Average middle points with narrow window for gentle smoothing
                 for (var i = 1; i < source.length - 1; i++) {
                     var x = 0;
                     var y = 0;
                     var count = 0;
                     
-                    // Use 7-point window for very strong smoothing
-                    for (var j = Math.max(0, i - 3); j <= Math.min(source.length - 1, i + 3); j++) {
+                    // Use 3-point window for gentler smoothing
+                    for (var j = Math.max(0, i - 1); j <= Math.min(source.length - 1, i + 1); j++) {
                         var weight = 1;
-                        if (j === i) weight = 3; // Give even more weight to center point
-                        else if (Math.abs(j - i) === 1) weight = 2; // More weight to immediate neighbors
+                        if (j === i) weight = 2; // Give more weight to center point to preserve shape
                         x += source[j].x * weight;
                         y += source[j].y * weight;
                         count += weight;
@@ -653,14 +652,14 @@
             return smoothed;
         }
         
-        // Reduce number of points while maintaining shape (more aggressive)
+        // Reduce number of points while maintaining shape (gentle)
         function simplifyPoints(pts) {
             if (pts.length <= 4) return pts;
             
             var simplified = [pts[0]];
             
-            // Skip more points for aggressive simplification
-            for (var i = 1; i < pts.length - 1; i += 3) {
+            // Skip fewer points to preserve more detail
+            for (var i = 1; i < pts.length - 1; i += 2) {
                 simplified.push(pts[i]);
             }
             
@@ -668,77 +667,51 @@
             return simplified;
         }
         
-        // Final smooth redraw with very aggressive anti-aliasing
+        // Final smooth redraw with moderate anti-aliasing
         function finalizeStroke(pts) {
             if (pts.length < 2) return;
             
             // First simplify to remove redundant points
             var simplified = simplifyPoints(pts);
             
-            // Apply very aggressive smoothing (many iterations)
-            var smoothedPts = smoothPoints(simplified, 8);
+            // Apply moderate smoothing (fewer iterations)
+            var smoothedPts = smoothPoints(simplified, 3);
             
             // Ensure smooth rendering properties
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             
             if (currentTool === 'pen') {
-                // Draw outer glow layer (very wide and soft)
+                // Draw outer glow layer (moderate)
                 ctx.strokeStyle = currentColor;
-                ctx.lineWidth = brushSize + 3;
+                ctx.lineWidth = brushSize + 1;
                 ctx.globalCompositeOperation = 'source-over';
-                ctx.shadowBlur = brushSize * 2;
+                ctx.shadowBlur = brushSize * 0.8;
                 ctx.shadowColor = currentColor;
-                ctx.globalAlpha = 0.2;
+                ctx.globalAlpha = 0.3;
             } else if (currentTool === 'eraser') {
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = brushSize * 3;
                 ctx.globalCompositeOperation = 'destination-out';
-                ctx.shadowBlur = brushSize * 1.5;
+                ctx.shadowBlur = brushSize;
                 ctx.shadowColor = 'rgba(0,0,0,0.5)';
             }
             
             ctx.beginPath();
             ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
             
-            // Draw with very smooth Catmull-Rom curves (low tension)
-            var tension = 0.3;
+            // Draw with smooth Catmull-Rom curves (moderate tension)
+            var tension = 0.5;
             for (var i = 0; i < smoothedPts.length - 1; i++) {
                 var p0 = smoothedPts[Math.max(0, i - 1)];
                 var p1 = smoothedPts[i];
                 var p2 = smoothedPts[i + 1];
                 var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
                 
-                var cp1x = p1.x + (p2.x - p0.x) * tension / 3;
-                var cp1y = p1.y + (p2.y - p0.y) * tension / 3;
-                var cp2x = p2.x - (p3.x - p1.x) * tension / 3;
-                var cp2y = p2.y - (p3.y - p1.y) * tension / 3;
-                
-                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
-            }
-            
-            ctx.stroke();
-            
-            // Draw middle glow layer
-            if (currentTool === 'pen') {
-                ctx.globalAlpha = 0.5;
-                ctx.shadowBlur = brushSize * 1;
-                ctx.lineWidth = brushSize + 1;
-            }
-            
-            ctx.beginPath();
-            ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
-            
-            for (var i = 0; i < smoothedPts.length - 1; i++) {
-                var p0 = smoothedPts[Math.max(0, i - 1)];
-                var p1 = smoothedPts[i];
-                var p2 = smoothedPts[i + 1];
-                var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
-                
-                var cp1x = p1.x + (p2.x - p0.x) * tension / 3;
-                var cp1y = p1.y + (p2.y - p0.y) * tension / 3;
-                var cp2x = p2.x - (p3.x - p1.x) * tension / 3;
-                var cp2y = p2.y - (p3.y - p1.y) * tension / 3;
+                var cp1x = p1.x + (p2.x - p0.x) * tension / 6;
+                var cp1y = p1.y + (p2.y - p0.y) * tension / 6;
+                var cp2x = p2.x - (p3.x - p1.x) * tension / 6;
+                var cp2y = p2.y - (p3.y - p1.y) * tension / 6;
                 
                 ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
             }
@@ -748,7 +721,7 @@
             // Draw main stroke (solid core)
             if (currentTool === 'pen') {
                 ctx.globalAlpha = 1;
-                ctx.shadowBlur = brushSize * 0.5;
+                ctx.shadowBlur = brushSize * 0.3;
                 ctx.strokeStyle = currentColor;
                 ctx.lineWidth = brushSize;
                 ctx.globalCompositeOperation = 'source-over';
@@ -763,41 +736,15 @@
                 var p2 = smoothedPts[i + 1];
                 var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
                 
-                var cp1x = p1.x + (p2.x - p0.x) * tension / 3;
-                var cp1y = p1.y + (p2.y - p0.y) * tension / 3;
-                var cp2x = p2.x - (p3.x - p1.x) * tension / 3;
-                var cp2y = p2.y - (p3.y - p1.y) * tension / 3;
+                var cp1x = p1.x + (p2.x - p0.x) * tension / 6;
+                var cp1y = p1.y + (p2.y - p0.y) * tension / 6;
+                var cp2x = p2.x - (p3.x - p1.x) * tension / 6;
+                var cp2y = p2.y - (p3.y - p1.y) * tension / 6;
                 
                 ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
             }
             
             ctx.stroke();
-            
-            // Draw inner crisp line
-            if (currentTool === 'pen') {
-                ctx.shadowBlur = 0;
-                ctx.lineWidth = brushSize * 0.6;
-                ctx.strokeStyle = currentColor;
-                
-                ctx.beginPath();
-                ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
-                
-                for (var i = 0; i < smoothedPts.length - 1; i++) {
-                    var p0 = smoothedPts[Math.max(0, i - 1)];
-                    var p1 = smoothedPts[i];
-                    var p2 = smoothedPts[i + 1];
-                    var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
-                    
-                    var cp1x = p1.x + (p2.x - p0.x) * tension / 3;
-                    var cp1y = p1.y + (p2.y - p0.y) * tension / 3;
-                    var cp2x = p2.x - (p3.x - p1.x) * tension / 3;
-                    var cp2y = p2.y - (p3.y - p1.y) * tension / 3;
-                    
-                    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
-                }
-                
-                ctx.stroke();
-            }
             
             // Reset properties
             ctx.shadowBlur = 0;
