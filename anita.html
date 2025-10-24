@@ -235,6 +235,67 @@
             right: 2px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
+        
+        .sidebar-spacer {
+            flex: 1;
+        }
+        
+        #settingsPanel {
+            display: none;
+            position: fixed;
+            left: 70px;
+            bottom: 20px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 1500;
+            min-width: 200px;
+        }
+        
+        #settingsPanel.show {
+            display: block;
+        }
+        
+        #settingsPanel h3 {
+            color: white;
+            font-size: 14px;
+            margin: 0 0 15px 0;
+            font-weight: bold;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 8px;
+        }
+        
+        .setting-option {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            text-align: left;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        
+        .setting-option:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .setting-option.active {
+            background: #007AFF;
+            border-color: #007AFF;
+            box-shadow: 0 0 10px rgba(0,122,255,0.5);
+        }
+        
+        #backgroundCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -282,6 +343,21 @@
         <button class="tool-btn" id="loadBtn" title="Carica">
             <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg>
         </button>
+        
+        <div class="sidebar-spacer"></div>
+        
+        <!-- Settings Button -->
+        <button class="tool-btn" id="settingsBtn" title="Impostazioni">
+            <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+        </button>
+    </div>
+    
+    <!-- Settings Panel -->
+    <div id="settingsPanel">
+        <h3>Sfondo</h3>
+        <button class="setting-option active" data-background="white">📄 Foglio Bianco</button>
+        <button class="setting-option" data-background="lines">📏 A Righe</button>
+        <button class="setting-option" data-background="grid">⊞ A Quadretti</button>
     </div>
     
     <!-- Color Palette Popup -->
@@ -299,6 +375,7 @@
         </div>
     </div>
     
+    <canvas id="backgroundCanvas"></canvas>
     <canvas id="canvas"></canvas>
     
     <div id="modal">
@@ -314,6 +391,8 @@
     <script>
         var canvas = document.getElementById('canvas');
         var ctx = canvas.getContext('2d');
+        var backgroundCanvas = document.getElementById('backgroundCanvas');
+        var bgCtx = backgroundCanvas.getContext('2d');
         var isDrawing = false;
         var currentTool = 'pen';
         var currentColor = '#000000';
@@ -322,23 +401,121 @@
         var undoStack = [];
         var maxUndoSteps = 15;
         var modal = document.getElementById('modal');
+        var currentBackground = 'white';
         
         // Setup canvas
         function resizeCanvas() {
             var sidebar = document.getElementById('sidebar');
             var sidebarWidth = sidebar.offsetWidth;
+            
+            // Resize both canvases
             canvas.width = window.innerWidth - sidebarWidth;
             canvas.height = window.innerHeight;
             canvas.style.marginLeft = sidebarWidth + 'px';
+            
+            backgroundCanvas.width = window.innerWidth - sidebarWidth;
+            backgroundCanvas.height = window.innerHeight;
+            backgroundCanvas.style.marginLeft = sidebarWidth + 'px';
             
             // Set smoothing properties
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.imageSmoothingEnabled = true;
             
+            // Redraw background
+            drawBackground(currentBackground);
+            
             if (undoStack.length > 0) {
                 restoreFromDataURL(undoStack[undoStack.length - 1]);
             }
+        }
+        
+        // Draw background patterns
+        function drawBackground(type) {
+            currentBackground = type;
+            bgCtx.fillStyle = 'white';
+            bgCtx.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+            
+            if (type === 'lines') {
+                // Draw horizontal lines
+                bgCtx.strokeStyle = '#E0E0E0';
+                bgCtx.lineWidth = 1;
+                bgCtx.beginPath();
+                
+                var lineSpacing = 30;
+                for (var y = lineSpacing; y < backgroundCanvas.height; y += lineSpacing) {
+                    bgCtx.moveTo(0, y);
+                    bgCtx.lineTo(backgroundCanvas.width, y);
+                }
+                
+                bgCtx.stroke();
+                
+                // Draw red margin line
+                bgCtx.strokeStyle = '#FFB6C1';
+                bgCtx.lineWidth = 2;
+                bgCtx.beginPath();
+                bgCtx.moveTo(40, 0);
+                bgCtx.lineTo(40, backgroundCanvas.height);
+                bgCtx.stroke();
+                
+            } else if (type === 'grid') {
+                // Draw grid
+                bgCtx.strokeStyle = '#E0E0E0';
+                bgCtx.lineWidth = 1;
+                bgCtx.beginPath();
+                
+                var gridSpacing = 20;
+                
+                // Vertical lines
+                for (var x = gridSpacing; x < backgroundCanvas.width; x += gridSpacing) {
+                    bgCtx.moveTo(x, 0);
+                    bgCtx.lineTo(x, backgroundCanvas.height);
+                }
+                
+                // Horizontal lines
+                for (var y = gridSpacing; y < backgroundCanvas.height; y += gridSpacing) {
+                    bgCtx.moveTo(0, y);
+                    bgCtx.lineTo(backgroundCanvas.width, y);
+                }
+                
+                bgCtx.stroke();
+                
+                // Draw thicker lines every 5 squares
+                bgCtx.strokeStyle = '#C0C0C0';
+                bgCtx.lineWidth = 1.5;
+                bgCtx.beginPath();
+                
+                var majorSpacing = gridSpacing * 5;
+                
+                for (var x = majorSpacing; x < backgroundCanvas.width; x += majorSpacing) {
+                    bgCtx.moveTo(x, 0);
+                    bgCtx.lineTo(x, backgroundCanvas.height);
+                }
+                
+                for (var y = majorSpacing; y < backgroundCanvas.height; y += majorSpacing) {
+                    bgCtx.moveTo(0, y);
+                    bgCtx.lineTo(backgroundCanvas.width, y);
+                }
+                
+                bgCtx.stroke();
+            }
+            
+            // Save preference
+            try {
+                window.localStorage.setItem('background', type);
+            } catch (e) {
+                // Ignore storage errors
+            }
+        }
+        
+        // Load saved background preference
+        try {
+            var savedBackground = window.localStorage.getItem('background');
+            if (savedBackground) {
+                currentBackground = savedBackground;
+            }
+        } catch (e) {
+            // Ignore storage errors
         }
         
         resizeCanvas();
@@ -796,6 +973,56 @@
                 }
                 this.className = 'tool-btn size-btn active';
             });
+        }
+        
+        // Settings Panel
+        var settingsPanel = document.getElementById('settingsPanel');
+        var settingsBtn = document.getElementById('settingsBtn');
+        
+        // Toggle settings panel
+        settingsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (settingsPanel.className === 'show') {
+                settingsPanel.className = '';
+            } else {
+                settingsPanel.className = 'show';
+                // Close color palette if open
+                colorPalette.className = '';
+            }
+        });
+        
+        // Close settings when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target !== settingsBtn && !settingsPanel.contains(e.target)) {
+                settingsPanel.className = '';
+            }
+        });
+        
+        // Background selection
+        var bgBtns = document.querySelectorAll('.setting-option');
+        for (var i = 0; i < bgBtns.length; i++) {
+            bgBtns[i].addEventListener('click', function() {
+                var bgType = this.getAttribute('data-background');
+                drawBackground(bgType);
+                
+                // Update active state
+                var allBgBtns = document.querySelectorAll('.setting-option');
+                for (var j = 0; j < allBgBtns.length; j++) {
+                    allBgBtns[j].className = 'setting-option';
+                }
+                this.className = 'setting-option active';
+            });
+        }
+        
+        // Set initial active background button
+        var savedBg = currentBackground;
+        var allBgBtns = document.querySelectorAll('.setting-option');
+        for (var i = 0; i < allBgBtns.length; i++) {
+            if (allBgBtns[i].getAttribute('data-background') === savedBg) {
+                allBgBtns[i].className = 'setting-option active';
+            } else {
+                allBgBtns[i].className = 'setting-option';
+            }
         }
         
         // New button
