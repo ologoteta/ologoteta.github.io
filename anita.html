@@ -317,6 +317,11 @@
             <svg viewBox="0 0 24 24"><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z"/></svg>
         </button>
         
+        <!-- Tool: Highlighter -->
+        <button class="tool-btn" id="highlighterBtn" title="Evidenziatore">
+            <svg viewBox="0 0 24 24"><path d="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31L11.69,24.64C12.5,25.44 13.76,25.44 14.54,24.64L20.5,18.68M2.86,15.93L1.78,17C1.37,17.42 1.37,18.08 1.78,18.5L4.5,21.22C4.92,21.63 5.58,21.63 6,21.22L7.07,20.14M7.5,18.5L5.5,20.5"/></svg>
+        </button>
+        
         <div class="divider"></div>
         
         <!-- Color Palette Button -->
@@ -398,6 +403,18 @@
             <button class="color-btn" style="background:#00CED1" data-color="#00CED1" title="Turchese"></button>
             <button class="color-btn" style="background:#9370DB" data-color="#9370DB" title="Lavanda"></button>
             <button class="color-btn" style="background:#32CD32" data-color="#32CD32" title="Verde"></button>
+            
+            <!-- Row 6: COLORI FLUO / EVIDENZIATORE -->
+            <button class="color-btn" style="background:#FFED00; box-shadow:0 0 15px #FFED00" data-color="#FFED00" title="⚡ Giallo Fluo"></button>
+            <button class="color-btn" style="background:#39FF14; box-shadow:0 0 15px #39FF14" data-color="#39FF14" title="⚡ Verde Fluo"></button>
+            <button class="color-btn" style="background:#FF006E; box-shadow:0 0 15px #FF006E" data-color="#FF006E" title="⚡ Rosa Fluo"></button>
+            <button class="color-btn" style="background:#FF5F00; box-shadow:0 0 15px #FF5F00" data-color="#FF5F00" title="⚡ Arancione Fluo"></button>
+            
+            <!-- Row 7: Più colori FLUO -->
+            <button class="color-btn" style="background:#00F0FF; box-shadow:0 0 15px #00F0FF" data-color="#00F0FF" title="⚡ Ciano Fluo"></button>
+            <button class="color-btn" style="background:#CCFF00; box-shadow:0 0 15px #CCFF00" data-color="#CCFF00" title="⚡ Lime Fluo"></button>
+            <button class="color-btn" style="background:#FF10F0; box-shadow:0 0 15px #FF10F0" data-color="#FF10F0" title="⚡ Magenta Fluo"></button>
+            <button class="color-btn" style="background:#FE019A; box-shadow:0 0 15px #FE019A" data-color="#FE019A" title="⚡ Fucsia Fluo"></button>
         </div>
     </div>
     
@@ -600,10 +617,17 @@
                 ctx.strokeStyle = currentColor;
                 ctx.lineWidth = brushSize;
                 ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 1;
             } else if (currentTool === 'eraser') {
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = brushSize * 3;
                 ctx.globalCompositeOperation = 'destination-out';
+                ctx.globalAlpha = 1;
+            } else if (currentTool === 'highlighter') {
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 0.4;
             }
             
             // Draw only new segments
@@ -715,6 +739,14 @@
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.shadowBlur = brushSize;
                 ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.globalAlpha = 1;
+            } else if (currentTool === 'highlighter') {
+                // Highlighter with transparency (no glow layer)
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 0.4;
             }
             
             ctx.beginPath();
@@ -738,33 +770,33 @@
             
             ctx.stroke();
             
-            // Draw main stroke (solid core)
+            // Draw main stroke (solid core) - only for pen, not for highlighter
             if (currentTool === 'pen') {
                 ctx.globalAlpha = 1;
                 ctx.shadowBlur = brushSize * 0.3;
                 ctx.strokeStyle = currentColor;
                 ctx.lineWidth = brushSize;
                 ctx.globalCompositeOperation = 'source-over';
-            }
-            
-            ctx.beginPath();
-            ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
-            
-            for (var i = 0; i < smoothedPts.length - 1; i++) {
-                var p0 = smoothedPts[Math.max(0, i - 1)];
-                var p1 = smoothedPts[i];
-                var p2 = smoothedPts[i + 1];
-                var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
                 
-                var cp1x = p1.x + (p2.x - p0.x) * tension / 6;
-                var cp1y = p1.y + (p2.y - p0.y) * tension / 6;
-                var cp2x = p2.x - (p3.x - p1.x) * tension / 6;
-                var cp2y = p2.y - (p3.y - p1.y) * tension / 6;
+                ctx.beginPath();
+                ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
                 
-                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+                for (var i = 0; i < smoothedPts.length - 1; i++) {
+                    var p0 = smoothedPts[Math.max(0, i - 1)];
+                    var p1 = smoothedPts[i];
+                    var p2 = smoothedPts[i + 1];
+                    var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
+                    
+                    var cp1x = p1.x + (p2.x - p0.x) * tension / 6;
+                    var cp1y = p1.y + (p2.y - p0.y) * tension / 6;
+                    var cp2x = p2.x - (p3.x - p1.x) * tension / 6;
+                    var cp2y = p2.y - (p3.y - p1.y) * tension / 6;
+                    
+                    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+                }
+                
+                ctx.stroke();
             }
-            
-            ctx.stroke();
             
             // Reset properties
             ctx.shadowBlur = 0;
@@ -890,10 +922,17 @@
                 ctx.strokeStyle = currentColor;
                 ctx.lineWidth = brushSize;
                 ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 1;
             } else if (currentTool === 'eraser') {
                 ctx.strokeStyle = 'white';
                 ctx.lineWidth = brushSize * 3;
                 ctx.globalCompositeOperation = 'destination-out';
+                ctx.globalAlpha = 1;
+            } else if (currentTool === 'highlighter') {
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.globalAlpha = 0.4;
             }
             ctx.beginPath();
             ctx.arc(coords.x, coords.y, brushSize / 2, 0, Math.PI * 2);
@@ -962,6 +1001,7 @@
             this.className = 'tool-btn active';
             document.getElementById('eraserBtn').className = 'tool-btn';
             document.getElementById('fillBtn').className = 'tool-btn';
+            document.getElementById('highlighterBtn').className = 'tool-btn';
         });
         
         document.getElementById('eraserBtn').addEventListener('click', function() {
@@ -969,6 +1009,7 @@
             this.className = 'tool-btn active';
             document.getElementById('penBtn').className = 'tool-btn';
             document.getElementById('fillBtn').className = 'tool-btn';
+            document.getElementById('highlighterBtn').className = 'tool-btn';
         });
         
         document.getElementById('fillBtn').addEventListener('click', function() {
@@ -976,6 +1017,15 @@
             this.className = 'tool-btn active';
             document.getElementById('penBtn').className = 'tool-btn';
             document.getElementById('eraserBtn').className = 'tool-btn';
+            document.getElementById('highlighterBtn').className = 'tool-btn';
+        });
+        
+        document.getElementById('highlighterBtn').addEventListener('click', function() {
+            currentTool = 'highlighter';
+            this.className = 'tool-btn active';
+            document.getElementById('penBtn').className = 'tool-btn';
+            document.getElementById('eraserBtn').className = 'tool-btn';
+            document.getElementById('fillBtn').className = 'tool-btn';
         });
         
         // Color Palette
@@ -1006,12 +1056,13 @@
             colorBtns[i].addEventListener('click', function() {
                 currentColor = this.getAttribute('data-color');
                 
-                // Don't change tool if fill is active
-                if (currentTool !== 'fill') {
+                // Don't change tool if fill or highlighter are active
+                if (currentTool !== 'fill' && currentTool !== 'highlighter') {
                     currentTool = 'pen';
                     document.getElementById('penBtn').className = 'tool-btn active';
                     document.getElementById('eraserBtn').className = 'tool-btn';
                     document.getElementById('fillBtn').className = 'tool-btn';
+                    document.getElementById('highlighterBtn').className = 'tool-btn';
                 }
                 
                 // Update color indicator
