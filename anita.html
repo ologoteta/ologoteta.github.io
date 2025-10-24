@@ -260,11 +260,9 @@
         <div class="divider"></div>
         
         <!-- Brush Sizes -->
-        <button class="tool-btn size-btn" data-size="2" title="XS">XS</button>
         <button class="tool-btn size-btn active" data-size="4" title="S">S</button>
-        <button class="tool-btn size-btn" data-size="8" title="M">M</button>
-        <button class="tool-btn size-btn" data-size="15" title="L">L</button>
-        <button class="tool-btn size-btn" data-size="25" title="XL">XL</button>
+        <button class="tool-btn size-btn" data-size="10" title="M">M</button>
+        <button class="tool-btn size-btn" data-size="20" title="L">L</button>
         
         <div class="divider"></div>
         
@@ -385,7 +383,9 @@
             };
         }
         
-        // Smooth drawing with quadratic curves
+        // Smooth drawing with better interpolation
+        var lastDrawnIndex = 0;
+        
         function drawSmooth() {
             if (points.length < 2) return;
             
@@ -399,22 +399,48 @@
                 ctx.globalCompositeOperation = 'destination-out';
             }
             
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, points[0].y);
-            
-            for (var i = 1; i < points.length - 1; i++) {
-                var xc = (points[i].x + points[i + 1].x) / 2;
-                var yc = (points[i].y + points[i + 1].y) / 2;
-                ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+            // Draw only new segments
+            if (lastDrawnIndex === 0) {
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
             }
             
-            if (points.length > 1) {
-                var last = points[points.length - 1];
-                var prev = points[points.length - 2];
-                ctx.quadraticCurveTo(prev.x, prev.y, last.x, last.y);
+            // Use cubic Bezier curves for smoother lines
+            for (var i = lastDrawnIndex; i < points.length - 1; i++) {
+                var p0 = points[Math.max(0, i - 1)];
+                var p1 = points[i];
+                var p2 = points[i + 1];
+                var p3 = points[Math.min(points.length - 1, i + 2)];
+                
+                // Calculate control points for cubic Bezier
+                var cp1x = p1.x + (p2.x - p0.x) / 6;
+                var cp1y = p1.y + (p2.y - p0.y) / 6;
+                var cp2x = p2.x - (p3.x - p1.x) / 6;
+                var cp2y = p2.y - (p3.y - p1.y) / 6;
+                
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
             }
             
             ctx.stroke();
+            lastDrawnIndex = Math.max(0, points.length - 2);
+        }
+        
+        // Filter points that are too close together
+        function addPoint(point) {
+            if (points.length === 0) {
+                points.push(point);
+                return;
+            }
+            
+            var last = points[points.length - 1];
+            var dx = point.x - last.x;
+            var dy = point.y - last.y;
+            var distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Only add point if it's far enough from the last one
+            if (distance > 2) {
+                points.push(point);
+            }
         }
         
         // Drawing functions
@@ -422,9 +448,24 @@
             e.preventDefault();
             isDrawing = true;
             points = [];
+            lastDrawnIndex = 0;
             var coords = getCoords(e);
             points.push(coords);
             saveState();
+            
+            // Draw initial point
+            if (currentTool === 'pen') {
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize;
+                ctx.globalCompositeOperation = 'source-over';
+            } else if (currentTool === 'eraser') {
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'destination-out';
+            }
+            ctx.beginPath();
+            ctx.arc(coords.x, coords.y, brushSize / 2, 0, Math.PI * 2);
+            ctx.fill();
         }
         
         function draw(e) {
@@ -432,16 +473,25 @@
             e.preventDefault();
             
             var coords = getCoords(e);
-            points.push(coords);
+            addPoint(coords);
             
-            drawSmooth();
+            if (points.length >= 2) {
+                drawSmooth();
+            }
         }
         
         function stopDrawing(e) {
             if (isDrawing) {
                 e.preventDefault();
                 isDrawing = false;
+                
+                // Draw final smooth curve
+                if (points.length >= 2) {
+                    drawSmooth();
+                }
+                
                 points = [];
+                lastDrawnIndex = 0;
             }
         }
         
