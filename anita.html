@@ -24,12 +24,6 @@
             user-select: none;
         }
         
-        #canvas {
-            display: block;
-            background: white;
-            touch-action: none;
-        }
-        
         #sidebar {
             position: fixed;
             top: 0;
@@ -291,10 +285,22 @@
         }
         
         #backgroundCanvas {
-            position: absolute;
+            display: block;
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: -1;
+            z-index: 0;
+            touch-action: none;
+        }
+        
+        #canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: transparent;
+            touch-action: none;
         }
     </style>
 </head>
@@ -411,11 +417,11 @@
             // Resize both canvases
             canvas.width = window.innerWidth - sidebarWidth;
             canvas.height = window.innerHeight;
-            canvas.style.marginLeft = sidebarWidth + 'px';
+            canvas.style.left = sidebarWidth + 'px';
             
             backgroundCanvas.width = window.innerWidth - sidebarWidth;
             backgroundCanvas.height = window.innerHeight;
-            backgroundCanvas.style.marginLeft = sidebarWidth + 'px';
+            backgroundCanvas.style.left = sidebarWidth + 'px';
             
             // Set smoothing properties
             ctx.lineCap = 'round';
