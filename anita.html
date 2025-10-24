@@ -383,8 +383,10 @@
             };
         }
         
-        // Smooth drawing with better interpolation
+        // Smooth drawing during the stroke (preview)
         var lastDrawnIndex = 0;
+        var tempCanvas = document.createElement('canvas');
+        var tempCtx = tempCanvas.getContext('2d');
         
         function drawSmooth() {
             if (points.length < 2) return;
@@ -425,6 +427,80 @@
             lastDrawnIndex = Math.max(0, points.length - 2);
         }
         
+        // Smooth the collected points using averaging
+        function smoothPoints(pts, iterations) {
+            if (pts.length < 3) return pts;
+            
+            var smoothed = [];
+            for (var iter = 0; iter < iterations; iter++) {
+                var source = (iter === 0) ? pts : smoothed;
+                smoothed = [];
+                
+                // Keep first point
+                smoothed.push(source[0]);
+                
+                // Average middle points
+                for (var i = 1; i < source.length - 1; i++) {
+                    smoothed.push({
+                        x: (source[i - 1].x + source[i].x + source[i + 1].x) / 3,
+                        y: (source[i - 1].y + source[i].y + source[i + 1].y) / 3
+                    });
+                }
+                
+                // Keep last point
+                smoothed.push(source[source.length - 1]);
+            }
+            
+            return smoothed;
+        }
+        
+        // Final smooth redraw with anti-aliasing
+        function finalizeStroke(pts) {
+            if (pts.length < 2) return;
+            
+            // Apply smoothing to points
+            var smoothedPts = smoothPoints(pts, 3);
+            
+            if (currentTool === 'pen') {
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = brushSize;
+                ctx.globalCompositeOperation = 'source-over';
+                // Add subtle shadow for anti-aliasing effect
+                ctx.shadowBlur = brushSize * 0.15;
+                ctx.shadowColor = currentColor;
+            } else if (currentTool === 'eraser') {
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = brushSize * 3;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.shadowBlur = brushSize * 0.3;
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            }
+            
+            ctx.beginPath();
+            ctx.moveTo(smoothedPts[0].x, smoothedPts[0].y);
+            
+            // Draw with Catmull-Rom style curves for extra smoothness
+            for (var i = 0; i < smoothedPts.length - 1; i++) {
+                var p0 = smoothedPts[Math.max(0, i - 1)];
+                var p1 = smoothedPts[i];
+                var p2 = smoothedPts[i + 1];
+                var p3 = smoothedPts[Math.min(smoothedPts.length - 1, i + 2)];
+                
+                // Catmull-Rom to Bezier conversion
+                var cp1x = p1.x + (p2.x - p0.x) / 6;
+                var cp1y = p1.y + (p2.y - p0.y) / 6;
+                var cp2x = p2.x - (p3.x - p1.x) / 6;
+                var cp2y = p2.y - (p3.y - p1.y) / 6;
+                
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y);
+            }
+            
+            ctx.stroke();
+            
+            // Reset shadow
+            ctx.shadowBlur = 0;
+        }
+        
         // Filter points that are too close together
         function addPoint(point) {
             if (points.length === 0) {
@@ -444,6 +520,8 @@
         }
         
         // Drawing functions
+        var drawingStartState = null;
+        
         function startDrawing(e) {
             e.preventDefault();
             isDrawing = true;
@@ -451,7 +529,9 @@
             lastDrawnIndex = 0;
             var coords = getCoords(e);
             points.push(coords);
-            saveState();
+            
+            // Save state before drawing
+            drawingStartState = canvas.toDataURL();
             
             // Draw initial point
             if (currentTool === 'pen') {
@@ -485,13 +565,31 @@
                 e.preventDefault();
                 isDrawing = false;
                 
-                // Draw final smooth curve
-                if (points.length >= 2) {
-                    drawSmooth();
+                // Restore to pre-drawing state
+                if (drawingStartState && points.length >= 2) {
+                    var img = new Image();
+                    img.onload = function() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0);
+                        
+                        // Draw final smoothed and anti-aliased stroke
+                        finalizeStroke(points);
+                        
+                        // Save for undo
+                        saveState();
+                        
+                        points = [];
+                        lastDrawnIndex = 0;
+                        drawingStartState = null;
+                    };
+                    img.src = drawingStartState;
+                } else {
+                    // Single point or very short stroke
+                    saveState();
+                    points = [];
+                    lastDrawnIndex = 0;
+                    drawingStartState = null;
                 }
-                
-                points = [];
-                lastDrawnIndex = 0;
             }
         }
         
