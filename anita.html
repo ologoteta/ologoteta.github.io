@@ -101,10 +101,15 @@
         .size-btn {
             width: 44px;
             height: 44px;
-                font-size: 11px;
+            font-size: 11px;
             font-weight: bold;
             color: white;
-            }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
+        }
             
             .divider {
             width: 80%;
@@ -331,12 +336,19 @@
         
         <div class="divider"></div>
         
+        <!-- Primary Color Button -->
+        <button class="tool-btn" id="primaryColorBtn" title="Colore Primario">
+            <div style="width:24px; height:24px; border-radius:50%; background:#000000; border:2px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
+        </button>
+        
+        <!-- Secondary Color Button -->
+        <button class="tool-btn" id="secondaryColorBtn" title="Colore Secondario">
+            <div style="width:24px; height:24px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
+        </button>
+        
         <!-- Color Palette Button -->
-        <button class="tool-btn" id="colorPaletteBtn" title="Colori" style="position:relative; display:flex; align-items:center; justify-content:center;">
-            <div style="position:relative; width:36px; height:36px;">
-                <span id="primaryColorIndicator" style="width:26px; height:26px; border-radius:50%; background:#000000; border:3px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:2;"></span>
-                <span id="secondaryColorIndicator" style="width:20px; height:20px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; bottom:0; right:0; z-index:1;"></span>
-    </div>
+        <button class="tool-btn" id="colorPaletteBtn" title="Palette Colori">
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" fill="currentColor"/></svg>
         </button>
         
         <div class="divider"></div>
@@ -1147,24 +1159,24 @@
         // Color Palette
         var colorPalette = document.getElementById('colorPalette');
         var colorPaletteBtn = document.getElementById('colorPaletteBtn');
-        var primaryColorIndicator = document.getElementById('primaryColorIndicator');
-        var secondaryColorIndicator = document.getElementById('secondaryColorIndicator');
+        var primaryColorBtn = document.getElementById('primaryColorBtn');
+        var secondaryColorBtn = document.getElementById('secondaryColorBtn');
         
         // Switch between primary and secondary color
-        primaryColorIndicator.addEventListener('click', function(e) {
+        primaryColorBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             activeColorSlot = 'primary';
             currentColor = primaryColor;
-            primaryColorIndicator.style.zIndex = '2';
-            secondaryColorIndicator.style.zIndex = '1';
+            primaryColorBtn.style.border = '3px solid #FFD700';
+            secondaryColorBtn.style.border = '2px solid rgba(0,0,0,0.5)';
         });
         
-        secondaryColorIndicator.addEventListener('click', function(e) {
+        secondaryColorBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             activeColorSlot = 'secondary';
             currentColor = secondaryColor;
-            primaryColorIndicator.style.zIndex = '1';
-            secondaryColorIndicator.style.zIndex = '2';
+            secondaryColorBtn.style.border = '3px solid #FFD700';
+            primaryColorBtn.style.border = '2px solid rgba(255,255,255,0.9)';
         });
         
         // Toggle color palette
@@ -1193,11 +1205,11 @@
                 // Apply to active color slot
                 if (activeColorSlot === 'primary') {
                     primaryColor = selectedColor;
-                    primaryColorIndicator.style.background = primaryColor;
+                    primaryColorBtn.querySelector('div').style.background = primaryColor;
                     currentColor = primaryColor;
                 } else {
                     secondaryColor = selectedColor;
-                    secondaryColorIndicator.style.background = secondaryColor;
+                    secondaryColorBtn.querySelector('div').style.background = secondaryColor;
                     currentColor = secondaryColor;
                 }
                 
