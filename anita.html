@@ -355,12 +355,13 @@
             <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         </button>
         
-        <button class="tool-btn" id="saveBtn" title="Salva">
-            <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-        </button>
         
         <button class="tool-btn" id="loadBtn" title="Carica">
             <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg>
+        </button>
+        
+        <button class="tool-btn" id="downloadBtn" title="Scarica">
+            <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V13H13V9H5V11H7V17H17V11H19V9Z"/></svg>
         </button>
         
         <div class="sidebar-spacer"></div>
@@ -1330,37 +1331,13 @@
             }
         }
         
-        // Save button
-        document.getElementById('saveBtn').addEventListener('click', function() {
-            var modalBody = document.getElementById('modalBody');
-            document.getElementById('modalTitle').textContent = 'Salva Disegno';
-            
-            modalBody.innerHTML = '<input type="text" id="saveNameInput" placeholder="Nome del disegno"><br><br>' +
-                '<button class="btn" id="confirmSave">Salva</button>';
-            
-            openModal();
-            
-            document.getElementById('confirmSave').addEventListener('click', function() {
-                var name = document.getElementById('saveNameInput').value;
-                if (!name || name === '') {
-                    var now = new Date();
-                    name = 'Disegno ' + now.getDate() + '/' + (now.getMonth()+1) + ' ' + now.getHours() + ':' + now.getMinutes();
-                }
-                
-                var dataURL = canvas.toDataURL('image/png');
-                var drawings = getAllDrawings();
-                
-                drawings.push({
-                    id: new Date().getTime(),
-                    name: name,
-                    data: dataURL,
-                    date: new Date().toISOString()
-                });
-                
-                saveAllDrawings(drawings);
-                alert('Disegno salvato!');
-                closeModal();
-            });
+        // Download button - scarica immediatamente il disegno corrente
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            var dataURL = canvas.toDataURL('image/png');
+            var link = document.createElement('a');
+            link.download = 'disegno_' + new Date().getTime() + '.png';
+            link.href = dataURL;
+            link.click();
         });
         
         // Load button
