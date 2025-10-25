@@ -65,9 +65,11 @@
         }
         
         .tool-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             fill: white;
+            display: block;
+            margin: 0 auto;
         }
         
         .color-btn {
@@ -99,12 +101,12 @@
         .size-btn {
             width: 44px;
             height: 44px;
-            font-size: 11px;
+                font-size: 11px;
             font-weight: bold;
             color: white;
-        }
-        
-        .divider {
+            }
+            
+            .divider {
             width: 80%;
             height: 1px;
             background: rgba(255,255,255,0.2);
@@ -304,27 +306,27 @@
     <div id="sidebar">
         <!-- Tool: Pen -->
         <button class="tool-btn active" id="penBtn" title="Penna">
-            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/></svg>
         </button>
         
         <!-- Tool: Eraser -->
         <button class="tool-btn" id="eraserBtn" title="Gomma">
-            <svg viewBox="0 0 24 24"><path d="M16.24 3.56l4.95 4.94c.78.79.78 2.05 0 2.84L12 20.53a4.008 4.008 0 0 1-5.66 0L2.81 17c-.78-.79-.78-2.05 0-2.84l10.6-10.6c.79-.78 2.05-.78 2.83 0M4.22 15.58l3.54 3.53c.78.79 2.04.79 2.83 0l3.53-3.53-6.36-6.36-3.54 3.53c-.78.79-.78 2.05 0 2.83z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><rect x="2" y="8" width="16" height="8" rx="2" fill="currentColor"/><path d="M6 8l4-4h8l-4 4H6z" fill="currentColor"/></svg>
         </button>
         
         <!-- Tool: Fill Bucket -->
         <button class="tool-btn" id="fillBtn" title="Secchiello">
-            <svg viewBox="0 0 24 24"><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z" fill="currentColor"/></svg>
         </button>
         
         <!-- Tool: Gradient Fill -->
         <button class="tool-btn" id="gradientFillBtn" title="Secchiello Sfumatura">
-            <svg viewBox="0 0 24 24"><path d="M11,9H13V6.5C13,5.47 13.5,4.47 14.21,3.73L15.64,2.29L17.05,3.71L15.62,5.14C15.22,5.54 15,6.09 15,6.67V9H17V11H15V13H17V15H15V17.33C15,17.91 15.22,18.46 15.62,18.86L17.05,20.29L15.64,21.71L14.21,20.27C13.5,19.53 13,18.53 13,17.5V15H11V17.5C11,18.53 10.5,19.53 9.79,20.27L8.36,21.71L6.95,20.29L8.38,18.86C8.78,18.46 9,17.91 9,17.33V15H7V13H9V11H7V9H9V6.67C9,6.09 8.78,5.54 8.38,5.14L6.95,3.71L8.36,2.29L9.79,3.73C10.5,4.47 11,5.47 11,6.5V9M11,11V13H13V11H11Z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:currentColor;stop-opacity:1" /><stop offset="100%" style="stop-color:currentColor;stop-opacity:0.3" /></linearGradient></defs><path d="M19,11.5C19,11.5 17,13.67 17,15A2,2 0 0,0 19,17A2,2 0 0,0 21,15C21,13.67 19,11.5 19,11.5M5.21,10L10,5.21L14.79,10M16.56,8.94L7.62,0L6.21,1.41L8.59,3.79L3.44,8.94C2.85,9.5 2.85,10.47 3.44,11.06L8.94,16.56C9.23,16.85 9.62,17 10,17C10.38,17 10.77,16.85 11.06,16.56L16.56,11.06C17.15,10.47 17.15,9.5 16.56,8.94Z" fill="url(#gradient)"/></svg>
         </button>
         
         <!-- Tool: Highlighter -->
         <button class="tool-btn" id="highlighterBtn" title="Evidenziatore">
-            <svg viewBox="0 0 24 24"><path d="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31L11.69,24.64C12.5,25.44 13.76,25.44 14.54,24.64L20.5,18.68M2.86,15.93L1.78,17C1.37,17.42 1.37,18.08 1.78,18.5L4.5,21.22C4.92,21.63 5.58,21.63 6,21.22L7.07,20.14M7.5,18.5L5.5,20.5"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><rect x="3" y="8" width="18" height="4" rx="2" fill="currentColor" opacity="0.6"/><rect x="5" y="6" width="14" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="1"/></svg>
         </button>
         
         <div class="divider"></div>
@@ -334,7 +336,7 @@
             <div style="position:relative; width:36px; height:36px;">
                 <span id="primaryColorIndicator" style="width:26px; height:26px; border-radius:50%; background:#000000; border:3px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; top:0; left:0; z-index:2;"></span>
                 <span id="secondaryColorIndicator" style="width:20px; height:20px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4); position:absolute; bottom:0; right:0; z-index:1;"></span>
-            </div>
+    </div>
         </button>
         
         <div class="divider"></div>
@@ -348,27 +350,27 @@
         
         <!-- Actions -->
         <button class="tool-btn" id="undoBtn" title="Annulla">
-            <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" fill="currentColor"/></svg>
         </button>
         
         <button class="tool-btn" id="newBtn" title="Nuovo">
-            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/></svg>
         </button>
         
         
         <button class="tool-btn" id="loadBtn" title="Carica">
-            <svg viewBox="0 0 24 24"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z" fill="currentColor"/></svg>
         </button>
         
         <button class="tool-btn" id="downloadBtn" title="Scarica">
-            <svg viewBox="0 0 24 24"><path d="M5,20H19V18H5M19,9H15V13H13V9H5V11H7V17H17V11H19V9Z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 9h-4V3H9v6H5l7 7 7-7z" fill="currentColor"/></svg>
         </button>
         
         <div class="sidebar-spacer"></div>
         
         <!-- Settings Button -->
         <button class="tool-btn" id="settingsBtn" title="Impostazioni">
-            <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" fill="currentColor"/></svg>
         </button>
     </div>
     
@@ -917,11 +919,13 @@
             var filledPixels = [];
             var minX = width, maxX = 0, minY = height, maxY = 0;
             
+            // More tolerant color matching to avoid white lines
             function colorMatch(pos) {
-                return pixels[pos] === startR &&
-                       pixels[pos + 1] === startG &&
-                       pixels[pos + 2] === startB &&
-                       pixels[pos + 3] === startA;
+                var tolerance = 10;
+                return Math.abs(pixels[pos] - startR) <= tolerance &&
+                       Math.abs(pixels[pos + 1] - startG) <= tolerance &&
+                       Math.abs(pixels[pos + 2] - startB) <= tolerance &&
+                       pixels[pos + 3] > 0; // Only match non-transparent pixels
             }
             
             // Find all pixels to fill
@@ -952,7 +956,7 @@
                 stack.push([x, y - 1]);
             }
             
-            // Apply gradient
+            // Apply gradient with better interpolation
             var gradientWidth = maxX - minX;
             var gradientHeight = maxY - minY;
             var diagonal = Math.sqrt(gradientWidth * gradientWidth + gradientHeight * gradientHeight);
@@ -962,13 +966,19 @@
                 var dx = pixel.x - minX;
                 var dy = pixel.y - minY;
                 var distance = Math.sqrt(dx * dx + dy * dy);
-                var ratio = diagonal > 0 ? distance / diagonal : 0;
+                var ratio = diagonal > 0 ? Math.min(1, Math.max(0, distance / diagonal)) : 0;
                 
                 var pos = (pixel.y * width + pixel.x) * 4;
-                pixels[pos] = Math.round(c1.r + (c2.r - c1.r) * ratio);
-                pixels[pos + 1] = Math.round(c1.g + (c2.g - c1.g) * ratio);
-                pixels[pos + 2] = Math.round(c1.b + (c2.b - c1.b) * ratio);
-                pixels[pos + 3] = 255;
+                
+                // Smooth interpolation to avoid banding
+                var r = Math.round(c1.r + (c2.r - c1.r) * ratio);
+                var g = Math.round(c1.g + (c2.g - c1.g) * ratio);
+                var b = Math.round(c1.b + (c2.b - c1.b) * ratio);
+                
+                pixels[pos] = r;
+                pixels[pos + 1] = g;
+                pixels[pos + 2] = b;
+                pixels[pos + 3] = 255; // Full opacity
             }
             
             ctx.putImageData(imageData, 0, 0);
@@ -1193,7 +1203,7 @@
                 
                 // Don't change tool if fill, gradient fill, or highlighter are active
                 if (currentTool !== 'fill' && currentTool !== 'gradientFill' && currentTool !== 'highlighter') {
-                    currentTool = 'pen';
+                currentTool = 'pen';
                     document.getElementById('penBtn').className = 'tool-btn active';
                     document.getElementById('eraserBtn').className = 'tool-btn';
                     document.getElementById('fillBtn').className = 'tool-btn';
@@ -1333,7 +1343,7 @@
         
         // Download button - scarica immediatamente il disegno corrente
         document.getElementById('downloadBtn').addEventListener('click', function() {
-            var dataURL = canvas.toDataURL('image/png');
+                var dataURL = canvas.toDataURL('image/png');
             var link = document.createElement('a');
             link.download = 'disegno_' + new Date().getTime() + '.png';
             link.href = dataURL;
