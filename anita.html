@@ -366,13 +366,10 @@
         </button>
         
         <button class="tool-btn" id="newBtn" title="Nuovo">
-            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/></svg>
+            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" fill="currentColor"/></svg>
         </button>
         
         
-        <button class="tool-btn" id="loadBtn" title="Carica">
-            <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z" fill="currentColor"/></svg>
-        </button>
         
         <button class="tool-btn" id="downloadBtn" title="Scarica">
             <svg viewBox="0 0 24 24" style="width:20px;height:20px;vertical-align:middle;"><path d="M19 9h-4V3H9v6H5l7 7 7-7z" fill="currentColor"/></svg>
@@ -1335,23 +1332,6 @@
             }
         });
         
-        // localStorage functions
-        function getAllDrawings() {
-            try {
-                var drawings = window.localStorage.getItem('drawings');
-                return drawings ? JSON.parse(drawings) : [];
-            } catch (e) {
-                return [];
-            }
-        }
-        
-        function saveAllDrawings(drawings) {
-            try {
-                window.localStorage.setItem('drawings', JSON.stringify(drawings));
-            } catch (e) {
-                alert('Errore nel salvataggio');
-            }
-        }
         
         // Download button - scarica immediatamente il disegno corrente
         document.getElementById('downloadBtn').addEventListener('click', function() {
@@ -1362,77 +1342,6 @@
             link.click();
         });
         
-        // Load button
-        document.getElementById('loadBtn').addEventListener('click', function() {
-            var drawings = getAllDrawings();
-            var modalBody = document.getElementById('modalBody');
-            document.getElementById('modalTitle').textContent = 'I Miei Disegni';
-            
-            if (drawings.length === 0) {
-                modalBody.innerHTML = '<p style="padding:20px;text-align:center">Nessun disegno salvato</p>';
-            } else {
-                var html = '';
-                for (var i = drawings.length - 1; i >= 0; i--) {
-                    var drawing = drawings[i];
-                    var date = new Date(drawing.date);
-                    var dateStr = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear() + ' ' + 
-                                  date.getHours() + ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-                    
-                    html += '<div class="saved-item">' +
-                        '<img src="' + drawing.data + '" class="saved-preview">' +
-                        '<div class="saved-info"><strong>' + drawing.name + '</strong><br>' + dateStr + '</div>' +
-                        '<button class="btn" onclick="loadDrawing(' + drawing.id + ')">Carica</button> ' +
-                        '<button class="btn" onclick="downloadDrawing(' + drawing.id + ')">Scarica</button> ' +
-                        '<button class="btn" onclick="deleteDrawing(' + drawing.id + ')">Elimina</button>' +
-                        '</div>';
-                }
-                modalBody.innerHTML = html;
-            }
-            
-            openModal();
-        });
-        
-        // Global functions for onclick
-        function loadDrawing(id) {
-            var drawings = getAllDrawings();
-            for (var i = 0; i < drawings.length; i++) {
-                if (drawings[i].id === id) {
-                    restoreFromDataURL(drawings[i].data);
-                    saveState();
-                    closeModal();
-                    return;
-                }
-            }
-        }
-        
-        function downloadDrawing(id) {
-            var drawings = getAllDrawings();
-            for (var i = 0; i < drawings.length; i++) {
-                if (drawings[i].id === id) {
-                    var link = document.createElement('a');
-                    link.download = drawings[i].name + '.png';
-                    link.href = drawings[i].data;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    return;
-                }
-            }
-        }
-        
-        function deleteDrawing(id) {
-            if (confirm('Vuoi eliminare questo disegno?')) {
-                var drawings = getAllDrawings();
-                var newDrawings = [];
-                for (var i = 0; i < drawings.length; i++) {
-                    if (drawings[i].id !== id) {
-                        newDrawings.push(drawings[i]);
-                    }
-                }
-                saveAllDrawings(newDrawings);
-                document.getElementById('loadBtn').click();
-            }
-        }
         
         // Prevent scrolling
         document.body.addEventListener('touchmove', function(e) {
