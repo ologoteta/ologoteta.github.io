@@ -37,12 +37,24 @@
             flex-direction: column;
             align-items: center;
             padding: 10px 0;
+            box-sizing: border-box;
+        }
+        
+        /* Forza allineamento perfetto */
+        #sidebar > * {
+            width: 44px !important;
+            height: 44px !important;
+            margin: 4px 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
         }
         
         .tool-btn {
             width: 44px;
             height: 44px;
-            margin: 4px 0;
+            margin: 4px auto;
             border: none;
             background: rgba(255,255,255,0.1);
             border-radius: 8px;
@@ -52,6 +64,7 @@
             justify-content: center;
             transition: all 0.2s ease;
             position: relative;
+            flex-shrink: 0;
         }
         
         .tool-btn:active {
@@ -73,15 +86,19 @@
         }
         
         .color-btn {
-            width: 40px;
-            height: 40px;
-            margin: 0;
+            width: 44px;
+            height: 44px;
+            margin: 4px auto;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
         
         .color-btn[data-color="#FFFFFF"] {
@@ -109,6 +126,8 @@
             justify-content: center;
             text-align: center;
             line-height: 1;
+            margin: 4px auto;
+            flex-shrink: 0;
         }
             
             .divider {
@@ -338,12 +357,12 @@
         
         <!-- Primary Color Button -->
         <button class="tool-btn" id="primaryColorBtn" title="Colore Primario">
-            <div style="width:24px; height:24px; border-radius:50%; background:#000000; border:2px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
+            <div style="width:20px; height:20px; border-radius:50%; background:#000000; border:2px solid rgba(255,255,255,0.9); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
         </button>
         
         <!-- Secondary Color Button -->
         <button class="tool-btn" id="secondaryColorBtn" title="Colore Secondario">
-            <div style="width:24px; height:24px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
+            <div style="width:20px; height:20px; border-radius:50%; background:#FFFFFF; border:2px solid rgba(0,0,0,0.5); box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>
         </button>
         
         <!-- Color Palette Button -->
