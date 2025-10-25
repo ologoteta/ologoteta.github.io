@@ -1080,8 +1080,14 @@
                 e.preventDefault();
                 isDrawing = false;
                 
-                // Restore to pre-drawing state
-                if (drawingStartState && points.length >= 2) {
+                // For eraser, don't redraw - just save the current state
+                if (currentTool === 'eraser') {
+                    saveState();
+                    points = [];
+                    lastDrawnIndex = 0;
+                    drawingStartState = null;
+                } else if (drawingStartState && points.length >= 2) {
+                    // For other tools, restore and redraw with smoothing
                     var img = new Image();
                     img.onload = function() {
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
