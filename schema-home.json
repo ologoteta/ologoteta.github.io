@@ -1,0 +1,441 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.oscarlogoteta.it/#person",
+      "name": "Oscar Logoteta",
+      "givenName": "Oscar",
+      "familyName": "Logoteta",
+      "alternateName": [
+        "OL"
+      ],
+      "url": "https://www.oscarlogoteta.it/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.oscarlogoteta.it/images/about-portrait.jpg",
+        "contentUrl": "https://www.oscarlogoteta.it/images/og-image.jpg"
+      },
+      "email": "mailto:oscarlogoteta@gmail.com",
+      "jobTitle": [
+        "CIO",
+        "Head of Operations",
+        "Autore"
+      ],
+      "description": [
+        {
+          "@value": "CIO e capo operations a Milano: AI, app, persone e risparmio misurabile. Autore dei noir del commissario Negri. Founder di mitcamper.",
+          "@language": "it"
+        },
+        {
+          "@value": "Milan-based CIO and head of operations: AI, apps, people and measurable savings. Author of the Commissioner Negri noir novels. Founder of mitcamper.",
+          "@language": "en"
+        }
+      ],
+      "birthDate": "1983-04-13",
+      "birthPlace": {
+        "@type": "City",
+        "name": "Milano",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Italy",
+          "sameAs": "https://www.wikidata.org/wiki/Q38"
+        }
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Milano",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Milano",
+          "addressRegion": "Lombardia",
+          "addressCountry": "IT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 45.4642,
+          "longitude": 9.19
+        }
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Italy"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Scienze della Comunicazione"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Operations Management",
+        "Digital Transformation",
+        "Product Management",
+        "Human Resources",
+        "Milan noir",
+        "Italian crime fiction",
+        "Cursor"
+      ],
+      "knowsLanguage": [
+        "it",
+        "en"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/oscarlogoteta"
+      ],
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "Chief Information Officer"
+        },
+        {
+          "@type": "Occupation",
+          "name": "Head of Operations"
+        },
+        {
+          "@type": "Occupation",
+          "name": "Novelist"
+        }
+      ],
+      "workExample": [
+        {
+          "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.mitcamper.com/#org",
+      "name": "mitcamper",
+      "url": "https://www.mitcamper.com",
+      "founder": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      }
+    },
+    {
+      "@type": "BookSeries",
+      "@id": "https://www.oscarlogoteta.it/#negri-series",
+      "name": "Le indagini del commissario Negri",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "inLanguage": "it",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.oscarlogoteta.it/#website",
+      "url": "https://www.oscarlogoteta.it/",
+      "name": "Oscar Logoteta",
+      "alternateName": "oscarlogoteta.it",
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "about": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.oscarlogoteta.it/#webpage",
+      "url": "https://www.oscarlogoteta.it/",
+      "name": "Oscar Logoteta | CIO, operations, AI e autore a Milano",
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#website"
+      },
+      "about": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "mainEntity": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "dateModified": "2026-09-22",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.oscarlogoteta.it/images/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".hero-lead",
+          ".about-body",
+          ".faq-item p"
+        ]
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.oscarlogoteta.it/#books",
+      "name": "Libri di Oscar Logoteta",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.oscarlogoteta.it/milanovertigo.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.oscarlogoteta.it/quattrovoltenatale.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://www.oscarlogoteta.it/milanosottozero.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://www.oscarlogoteta.it/milanodisillusa.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "url": "https://www.oscarlogoteta.it/acomearmatura.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.oscarlogoteta.it/#faq-schema",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Chi è Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti con l'AI, e scrive noir ambientati a Milano. È founder di mitcamper e autore della saga del commissario Renato Negri."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cosa fa Oscar Logoteta come CIO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unisce tecnologia, prodotto, persone e conti: AI e automazioni con Cursor, operations e riduzione costi misurabile (fino al -45% dove processi e AI contano), HR e cultura, app costruite end-to-end."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali libri ha scritto Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A come Armatura (2014, La Memoria del Mondo); la saga del commissario Negri per Fratelli Frilli — Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021); e il racconto Strano, il destino in Quattro volte Natale (Todaro, 2020)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cos'è mitcamper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo, end-to-end. Sito: https://www.mitcamper.com"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dove si trova Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Milano, Italia. Contatto: oscarlogoteta@gmail.com e LinkedIn https://www.linkedin.com/in/oscarlogoteta"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book",
+      "name": "Milano vertigo",
+      "url": "https://www.oscarlogoteta.it/milanovertigo.html",
+      "isbn": "9788869435751",
+      "datePublished": "2021",
+      "numberOfPages": 160,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanovertigo.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 3,
+      "description": "Terza indagine del commissario Renato Negri. Luglio 1979, Colonia Fara: un suicidio che non convince la mamèta del commissario."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book",
+      "name": "Quattro volte Natale. Piccoli omicidi a Milano",
+      "url": "https://www.oscarlogoteta.it/quattrovoltenatale.html",
+      "isbn": "9788832159080",
+      "datePublished": "2020",
+      "numberOfPages": 354,
+      "inLanguage": "it",
+      "genre": [
+        "Giallo",
+        "Antologia"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/quattrovoltenatale.png",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Oscar Logoteta",
+          "@id": "https://www.oscarlogoteta.it/#person"
+        },
+        {
+          "@type": "Person",
+          "name": "Giorgio Maimone"
+        },
+        {
+          "@type": "Person",
+          "name": "Paola Varalli"
+        },
+        {
+          "@type": "Person",
+          "name": "Riccardo Besola"
+        },
+        {
+          "@type": "Person",
+          "name": "Andrea Ferrari"
+        },
+        {
+          "@type": "Person",
+          "name": "Francesco Gallone"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Todaro Editore"
+      },
+      "description": "Quattro racconti, quattro Natali milanesi. Oscar Logoteta firma Strano, il destino: il commissario Miletta, vigilia di Natale 1977."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book",
+      "name": "Milano sottozero",
+      "url": "https://www.oscarlogoteta.it/milanosottozero.html",
+      "isbn": "9788869433061",
+      "datePublished": "2018",
+      "numberOfPages": 148,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanosottozero.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 2,
+      "description": "Seconda indagine del commissario Negri. Dicembre 1978: una quattordicenne dell'alta borghesia milanese trovata morta a pochi giorni dal Natale."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book",
+      "name": "Milano disillusa",
+      "url": "https://www.oscarlogoteta.it/milanodisillusa.html",
+      "isbn": "9788869432231",
+      "datePublished": "2017",
+      "numberOfPages": 156,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanodisillusa.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 1,
+      "description": "Prima indagine del commissario Renato Negri. 16 marzo 1978, Piccolo Teatro: la morte dell'illusionista Luigi Bernini."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book",
+      "name": "A come Armatura. Una storia degli anni '70",
+      "url": "https://www.oscarlogoteta.it/acomearmatura.html",
+      "isbn": "9788898414352",
+      "datePublished": "2014",
+      "numberOfPages": 206,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Romanzo storico",
+        "Narrativa italiana"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/acomearmatura.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "La Memoria del Mondo Editrice"
+      },
+      "description": "Romanzo d'esordio di Oscar Logoteta. Milano 1977, Antonino Laganà tra collettivo del Berchet, scout Agesci e gli anni di piombo."
+    }
+  ]
+}

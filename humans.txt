@@ -1,0 +1,14 @@
+/* TEAM */
+Name: Oscar Logoteta
+Role: CIO, head of operations, author
+Site: https://www.oscarlogoteta.it/
+Location: Milan, Italy
+Contact: oscarlogoteta@gmail.com
+LinkedIn: https://www.linkedin.com/in/oscarlogoteta
+
+/* SITE */
+Last update: 2026-09-22
+Language: Italian / English
+Doctype: HTML5
+Standards: Schema.org JSON-LD, Open Graph, llms.txt
+Cookies: none

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.oscarlogoteta.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/og-image.jpg</image:loc>
+      <image:title>Oscar Logoteta</image:title>
+      <image:caption>Oscar Logoteta, CIO e autore a Milano</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.oscarlogoteta.it/milanovertigo.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/milanovertigo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/milanovertigo.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/milanovertigo.html"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/milanovertigo.png</image:loc>
+      <image:title>Milano vertigo — Oscar Logoteta</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.oscarlogoteta.it/quattrovoltenatale.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/quattrovoltenatale.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/quattrovoltenatale.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/quattrovoltenatale.html"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/quattrovoltenatale.png</image:loc>
+      <image:title>Quattro volte Natale — Oscar Logoteta</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.oscarlogoteta.it/milanosottozero.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/milanosottozero.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/milanosottozero.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/milanosottozero.html"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/milanosottozero.png</image:loc>
+      <image:title>Milano sottozero — Oscar Logoteta</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.oscarlogoteta.it/milanodisillusa.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/milanodisillusa.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/milanodisillusa.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/milanodisillusa.html"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/milanodisillusa.png</image:loc>
+      <image:title>Milano disillusa — Oscar Logoteta</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.oscarlogoteta.it/acomearmatura.html</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/acomearmatura.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/acomearmatura.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/acomearmatura.html"/>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.oscarlogoteta.it/images/acomearmatura.png</image:loc>
+      <image:title>A come armatura — Oscar Logoteta</image:title>
+    </image:image>
+  </url>
+</urlset>

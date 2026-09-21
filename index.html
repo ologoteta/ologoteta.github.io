@@ -1,326 +1,736 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-  <!-- meta -->
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Oscar Logoteta - CIO | Product lead | UX lead | Author</title>
-  <meta content="Product manager, product owner, product management, author, books, commissario negri, a come armatura" name="keywords">
-  <meta content="Project management: understanding clients' needs, Moscow analysis for the requirements, from kick-off to the delivery, managing developers using Jira boards (Scrum and Kanban). UI/UX and Service Design: for web and mobile applications focused on user needs with a strong experience in graphic design and user interface." name="description">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,700,700i,900,900i" rel="stylesheet">
-
-  <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Libraries CSS Files -->
-  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
-  <link href="lib/hover/hover.min.css" rel="stylesheet">
-  <link href="lib/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  
-  <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
-
-  <!-- Responsive css -->
-  <link href="css/responsive.css" rel="stylesheet">
-
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="images/favicon.png">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oscar Logoteta | CIO, operations, AI e autore a Milano</title>
+  <meta name="description" content="Oscar Logoteta è CIO e capo operations a Milano: AI, app, persone e risparmio misurabile. Autore dei noir del commissario Negri. Founder di mitcamper.">
+  <meta name="keywords" content="Oscar Logoteta, CIO Milano, capo operations, AI, Cursor, mitcamper, commissario Negri, Milano vertigo, Milano sottozero, Milano disillusa, A come armatura, autore noir">
+  <meta name="author" content="Oscar Logoteta">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#0c0d10">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="geo.region" content="IT-MI">
+  <meta name="geo.placename" content="Milano">
+  <meta name="geo.position" content="45.4642;9.1900">
+  <meta name="ICBM" content="45.4642, 9.1900">
+  <link rel="canonical" href="https://www.oscarlogoteta.it/">
+  <link rel="alternate" hreflang="it" href="https://www.oscarlogoteta.it/">
+  <link rel="alternate" hreflang="en" href="https://www.oscarlogoteta.it/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://www.oscarlogoteta.it/">
+  <link rel="alternate" type="text/plain" title="llms.txt" href="https://www.oscarlogoteta.it/llms.txt">
+  <link rel="author" type="text/plain" href="https://www.oscarlogoteta.it/humans.txt">
+  <link rel="me" href="https://www.linkedin.com/in/oscarlogoteta">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Oscar Logoteta">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:url" content="https://www.oscarlogoteta.it/">
+  <meta property="og:title" content="Oscar Logoteta | CIO, operations, AI e autore a Milano">
+  <meta property="og:description" content="Oscar Logoteta è CIO e capo operations a Milano: AI, app, persone e risparmio misurabile. Autore dei noir del commissario Negri. Founder di mitcamper.">
+  <meta property="og:image" content="https://www.oscarlogoteta.it/images/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://www.oscarlogoteta.it/images/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Oscar Logoteta — CIO, Ops, AI, Autore. Milano.">
+  <meta property="profile:first_name" content="Oscar">
+  <meta property="profile:last_name" content="Logoteta">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Oscar Logoteta | CIO, operations, AI e autore a Milano">
+  <meta name="twitter:description" content="CIO e capo operations a Milano: AI, app, persone e risparmio misurabile. Autore. Founder di mitcamper.">
+  <meta name="twitter:image" content="https://www.oscarlogoteta.it/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="Oscar Logoteta — CIO, Ops, AI, Autore. Milano.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/book-open.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.oscarlogoteta.it/#person",
+      "name": "Oscar Logoteta",
+      "givenName": "Oscar",
+      "familyName": "Logoteta",
+      "alternateName": [
+        "OL"
+      ],
+      "url": "https://www.oscarlogoteta.it/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://www.oscarlogoteta.it/images/about-portrait.jpg",
+        "contentUrl": "https://www.oscarlogoteta.it/images/og-image.jpg"
+      },
+      "email": "mailto:oscarlogoteta@gmail.com",
+      "jobTitle": [
+        "CIO",
+        "Head of Operations",
+        "Autore"
+      ],
+      "description": [
+        {
+          "@value": "CIO e capo operations a Milano: AI, app, persone e risparmio misurabile. Autore dei noir del commissario Negri. Founder di mitcamper.",
+          "@language": "it"
+        },
+        {
+          "@value": "Milan-based CIO and head of operations: AI, apps, people and measurable savings. Author of the Commissioner Negri noir novels. Founder of mitcamper.",
+          "@language": "en"
+        }
+      ],
+      "birthDate": "1983-04-13",
+      "birthPlace": {
+        "@type": "City",
+        "name": "Milano",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Italy",
+          "sameAs": "https://www.wikidata.org/wiki/Q38"
+        }
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Milano",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Milano",
+          "addressRegion": "Lombardia",
+          "addressCountry": "IT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 45.4642,
+          "longitude": 9.19
+        }
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Italy"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Scienze della Comunicazione"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Operations Management",
+        "Digital Transformation",
+        "Product Management",
+        "Human Resources",
+        "Milan noir",
+        "Italian crime fiction",
+        "Cursor"
+      ],
+      "knowsLanguage": [
+        "it",
+        "en"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/oscarlogoteta"
+      ],
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "Chief Information Officer"
+        },
+        {
+          "@type": "Occupation",
+          "name": "Head of Operations"
+        },
+        {
+          "@type": "Occupation",
+          "name": "Novelist"
+        }
+      ],
+      "workExample": [
+        {
+          "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book"
+        },
+        {
+          "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.mitcamper.com/#org",
+      "name": "mitcamper",
+      "url": "https://www.mitcamper.com",
+      "founder": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      }
+    },
+    {
+      "@type": "BookSeries",
+      "@id": "https://www.oscarlogoteta.it/#negri-series",
+      "name": "Le indagini del commissario Negri",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "inLanguage": "it",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.oscarlogoteta.it/#website",
+      "url": "https://www.oscarlogoteta.it/",
+      "name": "Oscar Logoteta",
+      "alternateName": "oscarlogoteta.it",
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "about": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.oscarlogoteta.it/#webpage",
+      "url": "https://www.oscarlogoteta.it/",
+      "name": "Oscar Logoteta | CIO, operations, AI e autore a Milano",
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#website"
+      },
+      "about": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "mainEntity": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "dateModified": "2026-09-22",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.oscarlogoteta.it/images/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".hero-lead",
+          ".about-body",
+          ".faq-item p"
+        ]
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.oscarlogoteta.it/#books",
+      "name": "Libri di Oscar Logoteta",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "url": "https://www.oscarlogoteta.it/milanovertigo.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "url": "https://www.oscarlogoteta.it/quattrovoltenatale.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "url": "https://www.oscarlogoteta.it/milanosottozero.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "url": "https://www.oscarlogoteta.it/milanodisillusa.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "url": "https://www.oscarlogoteta.it/acomearmatura.html",
+          "item": {
+            "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.oscarlogoteta.it/#faq-schema",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Chi è Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti con l'AI, e scrive noir ambientati a Milano. È founder di mitcamper e autore della saga del commissario Renato Negri."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cosa fa Oscar Logoteta come CIO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unisce tecnologia, prodotto, persone e conti: AI e automazioni con Cursor, operations e riduzione costi misurabile (fino al -45% dove processi e AI contano), HR e cultura, app costruite end-to-end."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali libri ha scritto Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A come Armatura (2014, La Memoria del Mondo); la saga del commissario Negri per Fratelli Frilli — Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021); e il racconto Strano, il destino in Quattro volte Natale (Todaro, 2020)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cos'è mitcamper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo, end-to-end. Sito: https://www.mitcamper.com"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dove si trova Oscar Logoteta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Milano, Italia. Contatto: oscarlogoteta@gmail.com e LinkedIn https://www.linkedin.com/in/oscarlogoteta"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanovertigo.html#book",
+      "name": "Milano vertigo",
+      "url": "https://www.oscarlogoteta.it/milanovertigo.html",
+      "isbn": "9788869435751",
+      "datePublished": "2021",
+      "numberOfPages": 160,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanovertigo.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 3,
+      "description": "Terza indagine del commissario Renato Negri. Luglio 1979, Colonia Fara: un suicidio che non convince la mamèta del commissario."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/quattrovoltenatale.html#book",
+      "name": "Quattro volte Natale. Piccoli omicidi a Milano",
+      "url": "https://www.oscarlogoteta.it/quattrovoltenatale.html",
+      "isbn": "9788832159080",
+      "datePublished": "2020",
+      "numberOfPages": 354,
+      "inLanguage": "it",
+      "genre": [
+        "Giallo",
+        "Antologia"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/quattrovoltenatale.png",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Oscar Logoteta",
+          "@id": "https://www.oscarlogoteta.it/#person"
+        },
+        {
+          "@type": "Person",
+          "name": "Giorgio Maimone"
+        },
+        {
+          "@type": "Person",
+          "name": "Paola Varalli"
+        },
+        {
+          "@type": "Person",
+          "name": "Riccardo Besola"
+        },
+        {
+          "@type": "Person",
+          "name": "Andrea Ferrari"
+        },
+        {
+          "@type": "Person",
+          "name": "Francesco Gallone"
+        }
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "Todaro Editore"
+      },
+      "description": "Quattro racconti, quattro Natali milanesi. Oscar Logoteta firma Strano, il destino: il commissario Miletta, vigilia di Natale 1977."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanosottozero.html#book",
+      "name": "Milano sottozero",
+      "url": "https://www.oscarlogoteta.it/milanosottozero.html",
+      "isbn": "9788869433061",
+      "datePublished": "2018",
+      "numberOfPages": 148,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanosottozero.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 2,
+      "description": "Seconda indagine del commissario Negri. Dicembre 1978: una quattordicenne dell'alta borghesia milanese trovata morta a pochi giorni dal Natale."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/milanodisillusa.html#book",
+      "name": "Milano disillusa",
+      "url": "https://www.oscarlogoteta.it/milanodisillusa.html",
+      "isbn": "9788869432231",
+      "datePublished": "2017",
+      "numberOfPages": 156,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Noir",
+        "Giallo"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/milanodisillusa.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Fratelli Frilli Editori"
+      },
+      "isPartOf": {
+        "@id": "https://www.oscarlogoteta.it/#negri-series"
+      },
+      "position": 1,
+      "description": "Prima indagine del commissario Renato Negri. 16 marzo 1978, Piccolo Teatro: la morte dell'illusionista Luigi Bernini."
+    },
+    {
+      "@type": "Book",
+      "@id": "https://www.oscarlogoteta.it/acomearmatura.html#book",
+      "name": "A come Armatura. Una storia degli anni '70",
+      "url": "https://www.oscarlogoteta.it/acomearmatura.html",
+      "isbn": "9788898414352",
+      "datePublished": "2014",
+      "numberOfPages": 206,
+      "inLanguage": "it",
+      "bookFormat": "Paperback",
+      "genre": [
+        "Romanzo storico",
+        "Narrativa italiana"
+      ],
+      "image": "https://www.oscarlogoteta.it/images/acomearmatura.png",
+      "author": {
+        "@id": "https://www.oscarlogoteta.it/#person"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "La Memoria del Mondo Editrice"
+      },
+      "description": "Romanzo d'esordio di Oscar Logoteta. Milano 1977, Antonino Laganà tra collettivo del Berchet, scout Agesci e gli anni di piombo."
+    }
+  ]
+}
+  </script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main" data-i18n="skip">Salta al contenuto</a>
 
-  <!-- start section navbar -->
-  <nav id="main-nav">
-    <div class="row">
-      <div class="container">
-
-        <div class="logo">
-          <a href="index.html"><img src="images/logo.png" alt="Oscar Logoteta homepage"></a>
-        </div>
-
-        <div class="responsive"><i data-icon="m" class="ion-navicon-round"></i></div>
-
-        <ul class="nav-menu list-unstyled">
-          <li><a href="#header" class="smoothScroll">Home</a></li>
-          <li><a href="#about" class="smoothScroll">About</a></li>
-          <li><a href="#journal" class="smoothScroll">Books</a></li>
-          <li><a href="#contact" class="smoothScroll">Contact</a></li>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="#top" aria-label="Oscar Logoteta">OL</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="menuAria">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="visually-hidden" data-i18n="menu">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#about" data-i18n="navAbout">Chi sono</a></li>
+          <li><a href="#focus" data-i18n="navFocus">Focus</a></li>
+          <li><a href="#books" data-i18n="navBooks">Libri</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contatti</a></li>
         </ul>
-
-      </div>
-    </div>
-  </nav>
-  <!-- End section navbar -->
-
-
-  <!-- start section header -->
-  <div id="header" class="home">
-
-    <div class="container">
-      <div class="header-content">
-        <h1>I'm <span class="typed"></span></h1>
-        <p>CIO | Product lead | UX lead | Author</p>
-
-
-      </div>
-    </div>
-  </div>
-  <!-- End section header -->
-
-
-  <!-- start section about us -->
-  <div id="about" class="paddsection">
-    <div class="container">
-      <div class="row justify-content-between">
-
-        <div class="col-lg-4 ">
-          <div class="div-img-bg">
-            <div class="about-img">
-              <img src="images/me.jpg" class="img-responsive" alt="me">
-            </div>
-          </div>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn is-active" data-lang="it" aria-pressed="true">IT</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
         </div>
+      </nav>
+    </div>
+  </header>
 
-        <div class="col-lg-7">
-          <div class="about-descr">
-
-            <p class="p-heading">Born in Milan, 1983</p>
-            
-            <p class="separator">Laureato in Scienze della Comunicazione. Chief Information Officer con oltre 15 anni di esperienza nella guida di iniziative tecnologiche, di prodotto e di trasformazione digitale nei settori media, education e piattaforme enterprise. Attualmente ricopro il ruolo di CIO.
-
-Comprovata capacità di allineare la strategia IT agli obiettivi di business, promuovere l’efficienza operativa attraverso soluzioni basate su Intelligenza Artificiale (–45% costi operativi) e generare crescita misurabile tramite processi decisionali data-driven.
-
-Solida esperienza in product leadership, integrazione cloud e AI, analytics e coordinamento interfunzionale.</p>
-            <p class="separator"><a target="_blank" href="media/cv_oscar_logoteta_2026_IT.pdf"><i style="font-size: 14px;" class="bi bi-arrow-down-square"></i> Scarica il curriculum in PDF</a></p>
-            
-            <p class="separator"><i> Graduated in Communication Sciences, Chief Information Officer with 15+ years of experience leading technology, product, and digital transformation initiatives across media, education, and platform-based businesses. Serving as CIO for the past year. <strong>Proven ability to align IT strategy with business objectives, drive AI-enabled operational efficiency (45% cost reduction)</strong>, and deliver measurable growth through data-driven decision-making. Strong background in product leadership, cloud and AI integration, analytics, and cross-functional execution. </i></p>
-            <p class="separator"><a target="_blank" href="media/cv_oscar_logoteta_2026_EN.pdf"><i style="font-size: 14px;" class="bi bi-arrow-down-square"></i> Download PDF CV</a></p>
-
-          </div>
-
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-media" data-parallax>
+        <img src="images/home-bg.jpg" alt="Oscar Logoteta, ritratto all’aperto" width="1600" height="1067" fetchpriority="high">
+      </div>
+      <div class="hero-light" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-kicker"><span data-i18n="heroKicker">Milano</span> · 1983</p>
+        <h1 class="hero-name">
+          <span class="hero-line">Oscar</span>
+          <span class="hero-line">Logoteta</span>
+        </h1>
+        <p class="hero-lead" data-i18n="heroLead">CIO, operations, AI e app — e sì, anche i romanzi. Se serve farlo, lo faccio.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact" data-i18n="ctaContact">Parliamone</a>
+          <a class="btn btn-ghost cv-link" href="media/cv_oscar_logoteta_2026_IT.pdf" target="_blank" rel="noopener" data-i18n="ctaCv">CV PDF</a>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- end section about us -->
+    </section>
 
-
-  <!-- start section services -->
-  <div id="services">
-    <div class="container">
-
-        <div class="services-carousel owl-theme">
-
-          <div class="services-block">
-
-            <i class="ion-ios-browsers-outline"></i>
-            <span>UX DESIGN</span>
-            <p class="separator">I managed for many years the multimedia section of Pearson Italia, I was the UX lead designer</p>
-
+    <section class="about section" id="about">
+      <div class="about-stage">
+        <figure class="about-portrait reveal">
+          <img src="images/about-portrait.jpg" alt="Oscar Logoteta, CIO e autore a Milano" width="546" height="1024" loading="lazy">
+        </figure>
+        <div class="about-copy reveal">
+          <p class="section-eyebrow" data-i18n="aboutEyebrow">Chi sono</p>
+          <h2 class="section-title" data-i18n="aboutTitle">Nato a Milano, 1983</h2>
+          <p class="entity-answer" data-i18n="aboutAnswer">Oscar Logoteta è un CIO e capo operations milanese: tecnologia, prodotto, persone e conti nello stesso tavolo. Costruisce con l’AI, scrive noir ambientati a Milano, è founder di mitcamper.</p>
+          <dl class="fact-strip">
+            <div>
+              <dt data-i18n="factRoleLabel">Ruolo</dt>
+              <dd data-i18n="factRole">CIO e capo operations</dd>
+            </div>
+            <div>
+              <dt data-i18n="factCityLabel">Sede</dt>
+              <dd data-i18n="factCity">Milano, Italia</dd>
+            </div>
+            <div>
+              <dt data-i18n="factBornLabel">Nato</dt>
+              <dd>1983</dd>
+            </div>
+            <div>
+              <dt data-i18n="factBuildLabel">Founder</dt>
+              <dd><a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a></dd>
+            </div>
+          </dl>
+          <div class="about-body">
+            <p data-i18n="aboutP1">Laureato in Scienze della Comunicazione. Oggi sono CIO e capo operations: tecnologia, prodotto, persone e conti nello stesso tavolo. Oltre 15 anni a guidare trasformazione digitale tra media, education e piattaforme enterprise.</p>
+            <p data-i18n="aboutP2">Costruisco con AI e Cursor, faccio nascere app, organizzo HR e off-site, tengo insieme i team e — soprattutto — faccio risparmiare: efficienza operativa misurabile, fino al −45% sui costi dove l’AI e i processi contano davvero.</p>
+            <p data-i18n-html="aboutP3">Sono founder di <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a>: l’ho costruita da solo, end-to-end. Se manca qualcosa, lo disegno, lo porto in produzione e lo faccio funzionare — senza PowerPoint come mestiere.</p>
           </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-lightbulb-outline"></i>
-            <span>BRAND IDENTITY</span>
-            <p class="separator">I created more brands identity in my first period as graphic designer. Now, is a merginal activity</p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-book-outline"></i>
-            <span>BOOKS</span>
-            <p class="separator">I published novels and stories. It is my passion, is my way to explain my ideas, my stuff, my soul.</p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-analytics-outline"></i>
-            <span>Analytics</span>
-            <p class="separator">I'm currently product manager and I'm strong "data driven" person. There's the stuff that is objective and others that is subjective. So, I believe in data.</p>
-
-          </div>
-
-          <div class="services-block">
-
-            <i class="ion-ios-camera-outline"></i>
-            <span>PHOTOGRAPHY</span>
-            <p class="separator">I love my Canon 5D Mark II with 50mm 1.8. Nothing else.</p>
-
-          </div>
-
+          <a class="text-link cv-link" href="media/cv_oscar_logoteta_2026_IT.pdf" target="_blank" rel="noopener" data-i18n="aboutCv">Scarica il curriculum →</a>
         </div>
-
-    </div>
-
-  </div>
-  <!-- end section services -->
-
-  <!-- start section journal -->
-  <div id="journal" class="text-left paddsection">
-
-    <div class="container">
-      <div class="section-title text-center">
-        <h2>BOOKS</h2>
+        <span class="about-year" aria-hidden="true">83</span>
       </div>
-    </div>
+    </section>
 
-    <div class="container">
-      <div class="journal-block">
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="journal-info">
-
-              <a href="milanovertigo.html"><img src="images/milanovertigo.png" class="img-responsive" alt="Milano vertigo - libro"></a>
-
-              <div class="journal-txt">
-
-                <h4><a href="milanovertigo.html">MILANO VERTIGO</a></h4>
-                <p class="separator">2021 - Fratelli Frilli Editori</p>
-
-              </div>
-
+    <section class="focus section" id="focus">
+      <div class="section-inner">
+        <header class="section-header reveal">
+          <p class="section-eyebrow" data-i18n="focusEyebrow">Focus</p>
+          <h2 class="section-title display-xl" data-i18n="focusTitle">Cosa porto in campo</h2>
+        </header>
+        <ul class="focus-list">
+          <li class="focus-item reveal">
+            <span class="focus-index">01</span>
+            <div class="focus-copy">
+              <h3 data-i18n="focus1Title">AI &amp; build</h3>
+              <p data-i18n-html="focus1Body">Cursor, modelli, automazioni: costruisco app e tool che prima non esistevano. Come con <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a> — founder, e l’ho fatta tutta da solo.</p>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="journal-info">
-
-              <a href="quattrovoltenatale.html"><img src="images/quattrovoltenatale.png" class="img-responsive" alt="Quattro volte Natale - libro"></a>
-
-              <div class="journal-txt">
-
-                <h4><a href="quattrovoltenatale.html">QUATTRO VOLTE NATALE</a></h4>
-                <p class="separator">2020 - Editrice Todaro</p>
-
-              </div>
-
+          </li>
+          <li class="focus-item reveal">
+            <span class="focus-index">02</span>
+            <div class="focus-copy">
+              <h3 data-i18n="focus2Title">Ops &amp; risparmio</h3>
+              <p data-i18n="focus2Body">Capo operations sul serio: processi, costi, priorità. L’obiettivo è far girare meglio l’azienda e far risparmiare — in modo misurabile.</p>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="journal-info">
-
-              <a href="milanosottozero.html"><img src="images/milanosottozero.png" class="img-responsive" alt="Milano sottozero - libro"></a>
-
-              <div class="journal-txt">
-
-                <h4><a href="milanosottozero.html">MILANO SOTTOZERO</a></h4>
-                <p class="separator">2018 - Fratelli Frilli Editori</p>
-
-              </div>
-
+          </li>
+          <li class="focus-item reveal">
+            <span class="focus-index">03</span>
+            <div class="focus-copy">
+              <h3 data-i18n="focus3Title">Persone &amp; cultura</h3>
+              <p data-i18n="focus3Body">HR, off-site, allineamento dei team: organizzo le persone quanto organizzo i sistemi. Senza cultura, la tech non tiene.</p>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="journal-info">
-
-              <a href="milanodisillusa.html"><img src="images/milanodisillusa.png" class="img-responsive" alt="Milano disillusa - libro"></a>
-
-              <div class="journal-txt">
-
-                <h4><a href="milanodisillusa.html">MILANO DISILLUSA</a></h4>
-                <p class="separator">2017 - Fratelli Frilli Editori</p>
-
-              </div>
-
+          </li>
+          <li class="focus-item reveal">
+            <span class="focus-index">04</span>
+            <div class="focus-copy">
+              <h3 data-i18n="focus4Title">Scrittura</h3>
+              <p data-i18n="focus4Body">Romanzi e racconti ambientati a Milano: l’altra metà del cervello, quella che tiene insieme storie, ritmo e personaggi.</p>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6">
-            <div class="journal-info">
-
-              <a href="acomearmatura.html"><img src="images/acomearmatura.png" class="img-responsive" alt="A come armatura - libro"></a>
-
-              <div class="journal-txt">
-
-                <h4><a href="acomearmatura.html">A COME ARMATURA</a></h4>
-                <p class="separator">2014 - La Memoria del Mondo editrice</p>
-
-              </div>
-
-            </div>
-          </div>
-
-
-
-
-        </div>
+          </li>
+        </ul>
       </div>
-    </div>
+    </section>
 
-  </div>
-  <!-- End section journal -->
-
-
-  <!-- start sectoion contact -->
-  <div id="contact" class="paddsection">
-    <div class="container">
-        <div class="contact-block1">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="contact-contact">
-                <h2 class="mb-30">GET IN TOUCH</h2>
-                <ul class="contact-details">
-                  <li><span>Milan</span></li>
-                  <li><span>Italy</span></li>
-                  <li><span><script type="text/javascript">document.write('\u006f\u0073\u0063\u0061\u0072\u006c\u006f\u0067\u006f\u0074\u0065\u0074\u0061\u0040\u0067\u006d\u0061\u0069\u006c\u002e\u0063\u006f\u006d')</script></span></li>
-                </ul>
+    <section class="books section" id="books">
+      <div class="books-head section-inner">
+        <header class="section-header reveal">
+          <p class="section-eyebrow" data-i18n="booksEyebrow">Bibliografia</p>
+          <h2 class="section-title display-xl" data-i18n="booksTitle">Libri</h2>
+          <p class="books-lead" data-i18n="booksLead">Noir e storie milanesi — l’altra mia produzione.</p>
+          <p class="books-hint" data-i18n="booksHint" aria-hidden="true">Scorri →</p>
+        </header>
+      </div>
+      <div class="books-rail" tabindex="0">
+        <ul class="books-track">
+          <li class="book-item">
+            <a href="milanovertigo.html">
+              <img src="images/milanovertigo.png" alt="Copertina di Milano Vertigo di Oscar Logoteta, Fratelli Frilli 2021" width="400" height="600" loading="lazy">
+              <div class="book-meta">
+                <h3>Milano Vertigo</h3>
+                <p>2021 — Fratelli Frilli</p>
               </div>
-            </div>
+            </a>
+          </li>
+          <li class="book-item">
+            <a href="quattrovoltenatale.html">
+              <img src="images/quattrovoltenatale.png" alt="Copertina di Quattro volte Natale, Todaro 2020, con un racconto di Oscar Logoteta" width="400" height="600" loading="lazy">
+              <div class="book-meta">
+                <h3>Quattro volte Natale</h3>
+                <p>2020 — Todaro</p>
+              </div>
+            </a>
+          </li>
+          <li class="book-item">
+            <a href="milanosottozero.html">
+              <img src="images/milanosottozero.png" alt="Copertina di Milano sottozero di Oscar Logoteta, Fratelli Frilli 2018" width="400" height="600" loading="lazy">
+              <div class="book-meta">
+                <h3>Milano sottozero</h3>
+                <p>2018 — Fratelli Frilli</p>
+              </div>
+            </a>
+          </li>
+          <li class="book-item">
+            <a href="milanodisillusa.html">
+              <img src="images/milanodisillusa.png" alt="Copertina di Milano disillusa di Oscar Logoteta, Fratelli Frilli 2017" width="400" height="600" loading="lazy">
+              <div class="book-meta">
+                <h3>Milano disillusa</h3>
+                <p>2017 — Fratelli Frilli</p>
+              </div>
+            </a>
+          </li>
+          <li class="book-item">
+            <a href="acomearmatura.html">
+              <img src="images/acomearmatura.png" alt="Copertina di A come armatura di Oscar Logoteta, La Memoria del Mondo 2014" width="400" height="600" loading="lazy">
+              <div class="book-meta">
+                <h3>A come armatura</h3>
+                <p>2014 — La Memoria del Mondo</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-            <div class="col-lg-6">
-
-            </div>
-          </div>
+    <section class="faq section" id="faq">
+      <div class="section-inner">
+        <header class="section-header">
+          <p class="section-eyebrow" data-i18n="faqEyebrow">FAQ</p>
+          <h2 class="section-title display-xl" data-i18n="faqTitle">Domande frequenti</h2>
+        </header>
+        <div class="faq-list">
+          <article class="faq-item">
+            <h3 data-i18n="faq1Q">Chi è Oscar Logoteta?</h3>
+            <p data-i18n="faq1A">Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti con l’AI, e scrive noir ambientati a Milano. È founder di mitcamper e autore della saga del commissario Renato Negri.</p>
+          </article>
+          <article class="faq-item">
+            <h3 data-i18n="faq2Q">Cosa fa Oscar Logoteta come CIO?</h3>
+            <p data-i18n="faq2A">Unisce tecnologia, prodotto, persone e conti: AI e automazioni con Cursor, operations e riduzione costi misurabile (fino al −45% dove processi e AI contano), HR e cultura, app costruite end-to-end.</p>
+          </article>
+          <article class="faq-item">
+            <h3 data-i18n="faq3Q">Quali libri ha scritto Oscar Logoteta?</h3>
+            <p data-i18n="faq3A">A come Armatura (2014, La Memoria del Mondo); la saga del commissario Negri per Fratelli Frilli — Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021); e il racconto Strano, il destino in Quattro volte Natale (Todaro, 2020).</p>
+          </article>
+          <article class="faq-item">
+            <h3 data-i18n="faq4Q">Cos’è mitcamper?</h3>
+            <p data-i18n-html="faq4A">mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo, end-to-end. Sito: <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper.com</a>.</p>
+          </article>
+          <article class="faq-item">
+            <h3 data-i18n="faq5Q">Dove si trova Oscar Logoteta?</h3>
+            <p data-i18n="faq5A">Milano, Italia. Si può scrivere a oscarlogoteta@gmail.com o su LinkedIn.</p>
+          </article>
         </div>
       </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <div class="contact-blast reveal">
+        <p class="section-eyebrow" data-i18n="contactEyebrow">Contatti</p>
+        <h2 class="contact-mega" data-i18n="contactTitle">Scrivimi</h2>
+        <p class="contact-lead" data-i18n="contactLead">Milano. AI, ops, prodotto, persone — dimmi cosa ti serve sbloccare.</p>
+        <address>
+          <a class="contact-mail" id="email-link" href="mailto:oscarlogoteta@gmail.com">oscarlogoteta&#64;gmail.com</a>
+        </address>
+        <a class="contact-li" href="https://www.linkedin.com/in/oscarlogoteta" target="_blank" rel="noopener">LinkedIn →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p data-i18n="footerCopy">© 2026 Oscar Logoteta. Tutti i diritti riservati. Questo sito non usa cookie.</p>
+      <a href="https://www.linkedin.com/in/oscarlogoteta" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
     </div>
+  </footer>
 
-
-
-
-<!-- start section footer -->
-<div id="footer" class="text-center">
-  <div class="container">
-    <div class="socials-media text-center">
-
-      <ul class="list-unstyled">
-        <li><a href="http://www.linkedin.com/in/oscarlogoteta"><i class="bi bi-linkedin"></i></a></li>
-      </ul>
-
-    </div>
-
-  <p>&copy; Copyrights www.oscarlogoteta.it 2025. All rights reserved. This website doesn't use cookies.</p>
-
-  </div>
-</div>
-<!-- End section footer -->
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center active"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- JavaScript Libraries ================================= -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery/jquery-migrate.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/typed/typed.js"></script>
-  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="lib/magnific-popup/magnific-popup.min.js"></script>
-  <script src="lib/isotope/isotope.pkgd.min.js"></script>
-
-  <!-- Template Main Javascript File ================================= -->
-  <script src="js/main.js"></script>
-
+  <script src="js/site.js" defer></script>
+  <script src="js/book-open.js" defer></script>
 </body>
-
 </html>
