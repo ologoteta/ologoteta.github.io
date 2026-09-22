@@ -786,16 +786,19 @@ body.is-menu-open .nav-toggle {
   max-width: 52rem;
   margin: 0 auto;
   text-align: left;
-  isolation: isolate;
 }
 
-.signal-card-glow {
-  display: none;
+.signal-card,
+.signal-card *,
+.signal-card *::before,
+.signal-card *::after {
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
 }
 
 .signal-card-face {
   position: relative;
-  z-index: 1;
   display: grid;
   grid-template-columns: 1.35fr 0.75fr;
   gap: clamp(1.25rem, 3vw, 2rem);
@@ -803,12 +806,10 @@ body.is-menu-open .nav-toggle {
   padding: clamp(1.1rem, 2.5vw, 1.5rem);
   background: var(--ink);
   color: var(--snow);
-  transform: perspective(1200px) rotateX(0deg);
-  transition: transform 0.55s var(--ease);
 }
 
 .signal-card:hover .signal-card-face {
-  transform: perspective(1200px) rotateX(1.5deg) translateY(-4px);
+  transform: none;
 }
 
 .signal-id {
@@ -826,21 +827,11 @@ body.is-menu-open .nav-toggle {
   background: var(--ink-2);
 }
 
-.signal-photo::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(12, 13, 16, 0.55), transparent);
-  pointer-events: none;
-}
-
 .signal-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 18%;
-  filter: grayscale(0.12) contrast(1.04) brightness(1.04);
 }
 
 .signal-kicker {
