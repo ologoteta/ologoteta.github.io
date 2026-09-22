@@ -701,10 +701,8 @@ body.is-menu-open .nav-toggle {
 }
 
 .faq .display-xl {
-  max-width: min(100%, 14ch);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  hyphens: manual;
+  max-width: 100%;
+  white-space: nowrap;
 }
 
 .faq-list {
@@ -973,8 +971,11 @@ body.is-menu-open .nav-toggle {
   }
 
   .faq .display-xl {
-    font-size: clamp(2.4rem, 10vw, 3.6rem);
+    font-size: clamp(3.5rem, 18vw, 5.5rem);
     max-width: 100%;
+    white-space: nowrap;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
   }
 
   .books-lead {
@@ -1086,10 +1087,11 @@ body.is-menu-open .nav-toggle {
   }
 
   .faq .display-xl {
-    font-size: clamp(2.2rem, 11vw, 3.25rem);
+    font-size: clamp(3.25rem, 20vw, 4.5rem);
     max-width: 100%;
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    white-space: nowrap;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
   }
 
   .faq-item h3 {

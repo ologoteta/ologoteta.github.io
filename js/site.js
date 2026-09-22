@@ -27,8 +27,8 @@
       factCity: "Milano, Italia",
       factBornLabel: "Nato",
       factBuildLabel: "Founder",
-      faqEyebrow: "FAQ",
-      faqTitle: "Domande frequenti",
+      faqEyebrow: "Risposte",
+      faqTitle: "FAQ",
       faq1Q: "Chi è Oscar Logoteta?",
       faq1A:
         "Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti con l’AI, e scrive noir ambientati a Milano. È founder di mitcamper e autore della saga del commissario Renato Negri.",
@@ -52,7 +52,7 @@
         'Sono founder di <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a>: l’ho costruita da solo, end-to-end. Se manca qualcosa, lo disegno, lo porto in produzione e lo faccio funzionare — senza PowerPoint come mestiere.',
       aboutCv: "Scarica il curriculum →",
       focusEyebrow: "Focus",
-      focusTitle: "Cosa porto in campo",
+      focusTitle: "Cosa faccio",
       focus1Title: "AI & build",
       focus1Body:
         'Cursor, modelli, automazioni: costruisco app e tool che prima non esistevano. Come con <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a> — founder, e l’ho fatta tutta da solo.',
@@ -104,8 +104,8 @@
       factCity: "Milan, Italy",
       factBornLabel: "Born",
       factBuildLabel: "Founder",
-      faqEyebrow: "FAQ",
-      faqTitle: "Frequently asked",
+      faqEyebrow: "Answers",
+      faqTitle: "FAQ",
       faq1Q: "Who is Oscar Logoteta?",
       faq1A:
         "Oscar Logoteta is a Milan-based CIO and head of operations, born 13 April 1983. He leads digital transformation, builds AI products, and writes Milan-set noir. He is the founder of mitcamper and author of the Commissioner Renato Negri saga.",
@@ -129,7 +129,7 @@
         'I’m the founder of <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a>: I built it alone, end-to-end. If something’s missing, I design it, ship it, and make it work — PowerPoint is not the job.',
       aboutCv: "Download CV →",
       focusEyebrow: "Focus",
-      focusTitle: "What I bring",
+      focusTitle: "What I do",
       focus1Title: "AI & build",
       focus1Body:
         'Cursor, models, automation: I build apps and tools that didn’t exist before. Like <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper</a> — founder, and I built the whole thing myself.',
