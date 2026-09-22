@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Logoteta;Oscar;;;
+FN:Oscar Logoteta
+TITLE:CIO & Head of Operations
+ORG:mitcamper
+EMAIL;TYPE=INTERNET,PREF:oscarlogoteta@gmail.com
+URL;TYPE=WORK:https://www.oscarlogoteta.it
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/oscarlogoteta
+URL;TYPE=mitcamper:https://www.mitcamper.com
+ADR;TYPE=WORK:;;Milano;;;;Italia
+NOTE:CIO\, operations\, AI e app. Autore noir. Founder di mitcamper.
+PHOTO;VALUE=URI:https://www.oscarlogoteta.it/images/about-portrait.jpg
+END:VCARD

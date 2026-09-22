@@ -51,8 +51,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=202609221055">
-  <link rel="stylesheet" href="css/book-open.css?v=202609221055">
+  <link rel="stylesheet" href="css/site.css?v=202609221534">
+  <link rel="stylesheet" href="css/book-open.css?v=202609221534">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -716,11 +716,46 @@
       <div class="contact-blast reveal">
         <p class="section-eyebrow" data-i18n="contactEyebrow">Contatti</p>
         <h2 class="contact-mega" data-i18n="contactTitle">Scrivimi</h2>
-        <p class="contact-lead" data-i18n="contactLead">Milano. AI, ops, prodotto, persone — dimmi cosa ti serve sbloccare.</p>
-        <address>
-          <a class="contact-mail" id="email-link" href="mailto:oscarlogoteta@gmail.com">oscarlogoteta&#64;gmail.com</a>
-        </address>
-        <a class="contact-li" href="https://www.linkedin.com/in/oscarlogoteta" target="_blank" rel="noopener">LinkedIn →</a>
+        <p class="contact-lead" data-i18n="contactLead">Non un’email nuda: la mia signal card. Inquadra, salva, oppure lancia un prompt.</p>
+
+        <div class="signal-card" data-signal-card>
+          <div class="signal-card-glow" aria-hidden="true"></div>
+
+          <div class="signal-card-face">
+            <div class="signal-id">
+              <div class="signal-photo">
+                <img src="images/about-portrait.jpg" alt="Oscar Logoteta" width="320" height="400" loading="lazy">
+              </div>
+              <div class="signal-meta">
+                <p class="signal-kicker" data-i18n="signalKicker">Digital ID · Milano</p>
+                <h3 class="signal-name">Oscar Logoteta</h3>
+                <p class="signal-role" data-i18n="signalRole">CIO &amp; Head of Operations</p>
+                <ul class="signal-tags" aria-label="Tags">
+                  <li>AI</li>
+                  <li>Ops</li>
+                  <li>mitcamper</li>
+                  <li data-i18n="signalTagAuthor">Autore</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="signal-qr-block">
+              <a class="signal-qr" href="oscar-logoteta.vcf" download="Oscar-Logoteta.vcf" aria-label="QR code: salva contatto">
+                <img src="images/contact-qr.svg" width="200" height="200" alt="QR code vCard Oscar Logoteta">
+              </a>
+              <p class="signal-qr-caption" data-i18n="signalQrCaption">Inquadra · apre la vCard</p>
+            </div>
+          </div>
+
+          <div class="signal-actions">
+            <a class="signal-btn signal-btn-primary" href="oscar-logoteta.vcf" download="Oscar-Logoteta.vcf" data-i18n="signalSave">Salva contatto</a>
+            <button type="button" class="signal-btn" id="signal-prompt" data-i18n="signalPrompt">Copia prompt AI</button>
+            <a class="signal-btn" id="email-link" href="mailto:oscarlogoteta@gmail.com" data-i18n="signalMail">Email</a>
+            <a class="signal-btn" href="https://www.linkedin.com/in/oscarlogoteta" target="_blank" rel="noopener">LinkedIn</a>
+            <button type="button" class="signal-btn signal-btn-ghost" id="signal-share" hidden data-i18n="signalShare">Condividi</button>
+          </div>
+          <p class="signal-toast" id="signal-toast" role="status" aria-live="polite" hidden></p>
+        </div>
       </div>
     </section>
   </main>
@@ -732,7 +767,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=202609221055" defer></script>
-  <script src="js/book-open.js?v=202609221055" defer></script>
+  <script src="js/site.js?v=202609221534" defer></script>
+  <script src="js/book-open.js?v=202609221534" defer></script>
 </body>
 </html>

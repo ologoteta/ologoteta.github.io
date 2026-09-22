@@ -72,7 +72,19 @@
       contactEyebrow: "Contatti",
       contactTitle: "Scrivimi",
       contactLead:
-        "Milano. AI, ops, prodotto, persone — dimmi cosa ti serve sbloccare.",
+        "Non un’email nuda: la mia signal card. Inquadra, salva, oppure lancia un prompt.",
+      signalKicker: "Digital ID · Milano",
+      signalRole: "CIO & Head of Operations",
+      signalTagAuthor: "Autore",
+      signalQrCaption: "Inquadra · apre la vCard",
+      signalSave: "Salva contatto",
+      signalPrompt: "Copia prompt AI",
+      signalMail: "Email",
+      signalShare: "Condividi",
+      signalCopied: "Prompt copiato — incollalo in ChatGPT o Cursor",
+      signalShared: "Condiviso",
+      signalPromptText:
+        "Voglio contattare Oscar Logoteta (CIO & Head of Operations a Milano: AI, ops, prodotto, persone; founder di mitcamper; autore noir). Scrivi un messaggio breve, chiaro e umano per chiedergli di [descrivi cosa ti serve sbloccare]. Tono diretto, zero corporate fluff.",
       footerCopy:
         "© 2026 Oscar Logoteta. Tutti i diritti riservati. Questo sito non usa cookie.",
       metaTitle: "Oscar Logoteta | CIO, operations, AI e autore a Milano",
@@ -149,7 +161,19 @@
       contactEyebrow: "Contact",
       contactTitle: "Say hello",
       contactLead:
-        "Milan. AI, ops, product, people — tell me what you need unblocked.",
+        "Not a bare email — my signal card. Scan, save, or launch an AI prompt.",
+      signalKicker: "Digital ID · Milan",
+      signalRole: "CIO & Head of Operations",
+      signalTagAuthor: "Author",
+      signalQrCaption: "Scan · opens the vCard",
+      signalSave: "Save contact",
+      signalPrompt: "Copy AI prompt",
+      signalMail: "Email",
+      signalShare: "Share",
+      signalCopied: "Prompt copied — paste into ChatGPT or Cursor",
+      signalShared: "Shared",
+      signalPromptText:
+        "I want to contact Oscar Logoteta (CIO & Head of Operations in Milan: AI, ops, product, people; founder of mitcamper; noir author). Write a short, clear, human message asking him to [describe what you need unblocked]. Direct tone, zero corporate fluff.",
       footerCopy:
         "© 2026 Oscar Logoteta. All rights reserved. This website doesn’t use cookies.",
       metaTitle: "Oscar Logoteta | CIO, operations, AI and author in Milan",
@@ -385,8 +409,64 @@
     const link = document.getElementById("email-link");
     if (!link) return;
     const address = "oscarlogoteta@gmail.com";
-    link.textContent = address;
     link.setAttribute("href", `mailto:${address}`);
+  }
+
+  function initSignalCard() {
+    const toast = document.getElementById("signal-toast");
+    const promptBtn = document.getElementById("signal-prompt");
+    const shareBtn = document.getElementById("signal-share");
+
+    const showToast = (msg) => {
+      if (!toast || !msg) return;
+      toast.textContent = msg;
+      toast.hidden = false;
+      window.clearTimeout(showToast._t);
+      showToast._t = window.setTimeout(() => {
+        toast.hidden = true;
+      }, 2800);
+    };
+
+    const currentStrings = () => {
+      const lang = document.documentElement.lang === "en" ? "en" : "it";
+      return dict[lang] || dict.it;
+    };
+
+    if (promptBtn) {
+      promptBtn.addEventListener("click", async () => {
+        const strings = currentStrings();
+        const text = strings.signalPromptText || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast(strings.signalCopied);
+        } catch (_) {
+          const area = document.createElement("textarea");
+          area.value = text;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+          showToast(strings.signalCopied);
+        }
+      });
+    }
+
+    if (shareBtn && navigator.share) {
+      shareBtn.hidden = false;
+      shareBtn.addEventListener("click", async () => {
+        const strings = currentStrings();
+        try {
+          await navigator.share({
+            title: "Oscar Logoteta",
+            text: strings.signalRole,
+            url: "https://www.oscarlogoteta.it/oscar-logoteta.vcf",
+          });
+          showToast(strings.signalShared);
+        } catch (_) {
+          /* user cancelled */
+        }
+      });
+    }
   }
 
   function initSmoothAnchors() {
@@ -410,6 +490,7 @@
     initHero();
     initBooksRail();
     initEmail();
+    initSignalCard();
     initSmoothAnchors();
   });
 })();
