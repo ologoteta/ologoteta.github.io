@@ -85,6 +85,8 @@ h1, h2, h3, p { margin: 0; }
 }
 
 .wordmark {
+  position: relative;
+  z-index: 200;
   font-family: var(--font-display); font-weight: 800; font-size: 1.35rem;
   letter-spacing: -0.04em; color: #fff;
 }
@@ -110,35 +112,68 @@ h1, h2, h3, p { margin: 0; }
 .lang-btn.is-active { background: #fff; color: #000; }
 
 .nav-toggle {
-  display: none; appearance: none; border: 0; background: transparent;
-  width: 2.5rem; height: 2.5rem; cursor: pointer; position: relative; z-index: 110;
+  display: none;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 200;
+  flex: 0 0 auto;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-toggle-bar,
 .nav-toggle-bar::before,
 .nav-toggle-bar::after {
-  display: block; width: 1.4rem; height: 2px; background: #fff; margin: 0 auto;
-  transition: transform 0.35s var(--ease), opacity 0.35s;
+  display: block;
+  width: 1.35rem;
+  height: 2px;
+  background: #fff;
+  margin: 0 auto;
+  transition: transform 0.35s var(--ease), opacity 0.35s, background 0.25s;
 }
+
+.nav-toggle-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+
 .nav-toggle-bar::before,
 .nav-toggle-bar::after {
-  content: ""; position: absolute; left: 50%; margin-left: -0.7rem;
+  content: "";
+  position: absolute;
+  left: 0;
+  margin: 0;
 }
-.nav-toggle-bar::before { top: 0.7rem; }
-.nav-toggle-bar::after { bottom: 0.7rem; }
+
+.nav-toggle-bar::before { top: -0.42rem; }
+.nav-toggle-bar::after { top: 0.42rem; }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar { background: transparent; }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
-  top: 50%; transform: translateY(-50%) rotate(45deg); background: var(--ink);
+  top: 0;
+  transform: rotate(45deg);
+  background: var(--ink);
 }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
-  bottom: auto; top: 50%; transform: translateY(-50%) rotate(-45deg); background: var(--ink);
+  top: 0;
+  transform: rotate(-45deg);
+  background: var(--ink);
 }
 
 .site-header.is-menu-open .wordmark { color: var(--ink); }
 .site-header.is-menu-open .nav-toggle-bar,
 .site-header.is-menu-open .nav-toggle-bar::before,
 .site-header.is-menu-open .nav-toggle-bar::after { background: var(--ink); }
+.site-header.is-menu-open .nav-toggle[aria-expanded="true"] .nav-toggle-bar {
+  background: transparent;
+}
 
 /* —— Hero —— */
 
@@ -666,9 +701,9 @@ h1, h2, h3, p { margin: 0; }
 .contact-mega {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(4rem, 16vw, 12rem);
-  line-height: 0.85;
-  letter-spacing: -0.06em;
+  font-size: clamp(3.25rem, 7.5vw, 5.75rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
   text-transform: uppercase;
   margin: 0.4rem 0 1.25rem;
   max-width: 100%;
@@ -759,7 +794,7 @@ h1, h2, h3, p { margin: 0; }
   .site-nav {
     position: fixed;
     inset: 0;
-    z-index: 110;
+    z-index: 150;
     display: flex;
     flex-direction: column;
     justify-content: center;
