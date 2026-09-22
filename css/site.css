@@ -847,7 +847,7 @@ body.is-menu-open .nav-toggle {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 72% 18%;
+  object-position: 68% 30%;
   filter: grayscale(0.12) contrast(1.04) brightness(1.04);
 }
 
@@ -1005,7 +1005,15 @@ body.is-menu-open .nav-toggle {
 
 @media (max-width: 520px) {
   .signal-id {
-    grid-template-columns: 6.5rem 1fr;
+    grid-template-columns: 7rem 1fr;
+  }
+
+  .signal-photo {
+    aspect-ratio: 3 / 4;
+  }
+
+  .signal-photo img {
+    object-position: 62% 26%;
   }
 
   .signal-name {
