@@ -72,7 +72,7 @@
       contactEyebrow: "Contatti",
       contactTitle: "Scrivimi",
       contactLead:
-        "Non un’email nuda: la mia signal card. Inquadra, salva, oppure lancia un prompt.",
+        "Inquadra, salva, oppure lancia un prompt.",
       signalKicker: "Digital ID · Milano",
       signalRole: "CIO & Head of Operations",
       signalQrCaption: "Inquadra · apre la vCard",
@@ -160,7 +160,7 @@
       contactEyebrow: "Contact",
       contactTitle: "Say hello",
       contactLead:
-        "Not a bare email — my signal card. Scan, save, or launch an AI prompt.",
+        "Scan, save, or launch an AI prompt.",
       signalKicker: "Digital ID · Milan",
       signalRole: "CIO & Head of Operations",
       signalQrCaption: "Scan · opens the vCard",
