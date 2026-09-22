@@ -151,8 +151,8 @@ body.is-menu-open .wordmark {
   top: calc((var(--header-h) - 2.75rem) / 2);
   right: var(--gutter);
   z-index: 100200;
-  background: var(--signal);
-  color: var(--ink);
+  background: transparent;
+  color: #fff;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -162,8 +162,8 @@ body.is-menu-open .wordmark {
   display: block;
   width: 1.2rem;
   height: 2px;
-  background: var(--ink);
-  transition: transform 0.35s var(--ease), top 0.35s var(--ease);
+  background: currentColor;
+  transition: transform 0.35s var(--ease), top 0.35s var(--ease), background 0.25s;
 }
 
 .nav-toggle-bar {
@@ -190,11 +190,17 @@ body.is-menu-open .wordmark {
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
   top: 0;
   transform: rotate(45deg);
+  background: var(--ink);
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
   top: 0;
   transform: rotate(-45deg);
+  background: var(--ink);
+}
+
+body.is-menu-open .nav-toggle {
+  color: var(--ink);
 }
 
 @media (min-width: 861px) {
