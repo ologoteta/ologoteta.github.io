@@ -249,6 +249,7 @@
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         nav.classList.toggle("is-open", open);
         header.classList.toggle("is-menu-open", open);
+        document.body.classList.toggle("is-menu-open", open);
         document.body.style.overflow = open ? "hidden" : "";
       };
 
