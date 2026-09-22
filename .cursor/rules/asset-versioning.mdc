@@ -1,0 +1,23 @@
+---
+description: Bust CSS/JS cache via asset-version after stylesheet or script changes
+globs: "{css,js}/**/*.{css,js}"
+alwaysApply: false
+---
+
+# Asset versioning (cache bust)
+
+Local CSS/JS are loaded with `?v=` from `asset-version`.
+
+After changing any file under `css/` or `js/`, before committing:
+
+```bash
+python3 scripts/bump-assets.py
+```
+
+Include in the commit: `asset-version` and every updated `*.html`.
+
+Options:
+
+- `python3 scripts/bump-assets.py` — timestamp `YYYYMMDDHHMM`
+- `python3 scripts/bump-assets.py --git` — short git SHA
+- `python3 scripts/bump-assets.py --sync` — re-stamp HTML with current `asset-version`
