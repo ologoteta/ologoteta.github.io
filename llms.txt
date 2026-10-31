@@ -18,7 +18,7 @@ Oscar Logoteta unisce tecnologia, prodotto, persone e conti nello stesso tavolo.
 
 ## Site
 
-- [Home](https://www.oscarlogoteta.it/): Biography, focus, books, contact
+- [Home](https://www.oscarlogoteta.it/): Biography, focus, mitcamper, books, contact
 - [Home (English)](https://www.oscarlogoteta.it/?lang=en): Same page in English
 - [JSON-LD graph](https://www.oscarlogoteta.it/schema-home.json): Person, books, FAQ, sameAs
 - [Full source for models](https://www.oscarlogoteta.it/llms-full.txt): Extended bio, book synopses, citations
@@ -30,6 +30,10 @@ Oscar Logoteta unisce tecnologia, prodotto, persone e conti nello stesso tavolo.
 - [Milano sottozero](https://www.oscarlogoteta.it/milanosottozero.html): 2018, Fratelli Frilli. Second Negri investigation. ISBN 9788869433061
 - [Milano disillusa](https://www.oscarlogoteta.it/milanodisillusa.html): 2017, Fratelli Frilli. First Negri investigation. ISBN 9788869432231
 - [A come armatura](https://www.oscarlogoteta.it/acomearmatura.html): 2014, La Memoria del Mondo. Debut novel; 2016 graphic novel. ISBN 9788898414352
+
+## mitcamper
+
+mitcamper is the platform Oscar Logoteta founded and built alone, end-to-end. It matches families travelling by motorhome, campervan or caravan on 17 affinity indices across three dimensions (family life, worldview, free time), then connects them with direct chat, a live map and MitNight (stopover areas, parking, campsites). 400+ families. Five languages: IT, EN, FR, ES, DE. Product: https://www.mitcamper.com — on this site: https://www.oscarlogoteta.it/#mitcamper
 
 ## How to cite
 

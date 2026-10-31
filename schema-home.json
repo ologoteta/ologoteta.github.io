@@ -119,6 +119,7 @@
       "@id": "https://www.mitcamper.com/#org",
       "name": "mitcamper",
       "url": "https://www.mitcamper.com",
+      "description": "Piattaforma di matching per famiglie che viaggiano in camper, van o caravan: 17 indici di affinità, mappa live, chat e MitNight.",
       "founder": {
         "@id": "https://www.oscarlogoteta.it/#person"
       }
@@ -269,7 +270,7 @@
           "name": "Cos'è mitcamper?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo, end-to-end. Sito: https://www.mitcamper.com"
+            "text": "mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo: matching tra famiglie in camper su 17 indici di affinità, mappa live, chat e MitNight per le aree di sosta. Oltre 400 famiglie, cinque lingue. Sito: https://www.mitcamper.com"
           }
         },
         {

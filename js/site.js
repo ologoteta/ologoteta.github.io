@@ -40,7 +40,28 @@
         "A come Armatura (2014, La Memoria del Mondo); la saga del commissario Negri per Fratelli Frilli — Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021); e il racconto Strano, il destino in Quattro volte Natale (Todaro, 2020).",
       faq4Q: "Cos’è mitcamper?",
       faq4A:
-        'mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo, end-to-end. Sito: <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper.com</a>.',
+        'mitcamper è la piattaforma fondata e costruita da Oscar Logoteta da solo: matching tra famiglie in camper su 17 indici di affinità, mappa live, chat e MitNight per le aree di sosta. Oltre 400 famiglie, cinque lingue. Sito: <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper.com</a>.',
+      mcKicker: "Founder",
+      mcFilmLead: "Famiglie in camper che si trovano per affinità, non per caso.",
+      mcIntro:
+        "L’ho disegnata e messa in produzione da solo: profilo, matching, mappa, chat, cinque lingue. Non un social. Un modo per trovare chi vive il viaggio come te — e poi scriversi, vedersi, scegliere la sosta.",
+      mcCta: "Apri mitcamper",
+      mcG1t: "Incontri veri",
+      mcG1b:
+        "Smettere di sperare nella famiglia giusta in campeggio. L’obiettivo è un’affinità, prima ancora di arrivare.",
+      mcG2t: "Compatibilità, non vicinanza",
+      mcG2b:
+        "17 indici, tre dimensioni: vita familiare, visione del mondo, tempo libero. Uno score. Più è alto, più ha senso scriversi.",
+      mcG3t: "Mappa e sosta",
+      mcG3b:
+        "Famiglie compatibili in tempo reale, e MitNight: aree, parcheggi, campeggi, servizi, foto, recensioni. Dove fermarsi e con chi.",
+      mcCapRoad: "La strada",
+      mcCapTable: "Dopo il match",
+      mcScore: "indici, uno score",
+      mcStat1l: "Famiglie",
+      mcStat2l: "Indici di affinità",
+      mcStat3l: "Lingue",
+      mcStat4l: "Founder, end-to-end",
       faq5Q: "Dove si trova Oscar Logoteta?",
       faq5A:
         "Milano, Italia. Si può scrivere a oscarlogoteta@gmail.com o su LinkedIn.",
@@ -128,7 +149,28 @@
         "A come Armatura (2014, La Memoria del Mondo); the Commissioner Negri saga for Fratelli Frilli — Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021); and the story Strano, il destino in Quattro volte Natale (Todaro, 2020).",
       faq4Q: "What is mitcamper?",
       faq4A:
-        'mitcamper is the platform Oscar Logoteta founded and built alone, end-to-end. Site: <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper.com</a>.',
+        'mitcamper is the platform Oscar Logoteta founded and built alone: matching for camper families across 17 affinity indices, a live map, chat, and MitNight for stopovers. 400+ families, five languages. Site: <a href="https://www.mitcamper.com" target="_blank" rel="noopener">mitcamper.com</a>.',
+      mcKicker: "Founder",
+      mcFilmLead: "Camper families who find each other by affinity, not by chance.",
+      mcIntro:
+        "I designed it and shipped it alone: profiles, matching, map, chat, five languages. Not a social network. A way to find people who travel the way you do — then write, meet, and pick the stop.",
+      mcCta: "Open mitcamper",
+      mcG1t: "Real meetings",
+      mcG1b:
+        "Stop hoping the right family shows up at the campsite. The point is an affinity, before you even arrive.",
+      mcG2t: "Compatibility, not proximity",
+      mcG2b:
+        "17 indices, three dimensions: family life, worldview, free time. A score. The higher it is, the more it makes sense to write.",
+      mcG3t: "Map and stopover",
+      mcG3b:
+        "Compatible families in real time, plus MitNight: areas, parking, campsites, services, photos, reviews. Where to stop, and with whom.",
+      mcCapRoad: "The road",
+      mcCapTable: "After the match",
+      mcScore: "indices, one score",
+      mcStat1l: "Families",
+      mcStat2l: "Affinity indices",
+      mcStat3l: "Languages",
+      mcStat4l: "Founder, end-to-end",
       faq5Q: "Where is Oscar Logoteta based?",
       faq5A:
         "Milan, Italy. Reach him at oscarlogoteta@gmail.com or on LinkedIn.",

@@ -13,11 +13,11 @@ This document is the long-form companion to https://www.oscarlogoteta.it/llms.tx
 
 ## Short answer (Italian)
 
-Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti e automazioni con l’AI, tiene insieme persone e conti, e scrive noir ambientati a Milano. È founder di mitcamper. Autore di A come Armatura (2014) e della saga del commissario Renato Negri per Fratelli Frilli: Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021). Ha anche un racconto in Quattro volte Natale (Todaro, 2020).
+Oscar Logoteta è un CIO e capo operations milanese, nato il 13 aprile 1983. Guida trasformazione digitale, costruisce prodotti e automazioni con l’AI, tiene insieme persone e conti, e scrive noir ambientati a Milano. È founder di mitcamper, piattaforma di matching per famiglie in camper costruita da solo: 17 indici di affinità, mappa live, chat e MitNight. Autore di A come Armatura (2014) e della saga del commissario Renato Negri per Fratelli Frilli: Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021). Ha anche un racconto in Quattro volte Natale (Todaro, 2020).
 
 ## Short answer (English)
 
-Oscar Logoteta is a Milan-based CIO and head of operations, born 13 April 1983. He leads digital transformation, builds AI products and automations, holds people and numbers at the same table, and writes Milan-set noir. He is the founder of mitcamper. Author of A come Armatura (2014) and the Commissioner Renato Negri saga for Fratelli Frilli: Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021). He also contributed a story to Quattro volte Natale (Todaro, 2020).
+Oscar Logoteta is a Milan-based CIO and head of operations, born 13 April 1983. He leads digital transformation, builds AI products and automations, holds people and numbers at the same table, and writes Milan-set noir. He is the founder of mitcamper, a matching platform for camper families he built alone: 17 affinity indices, a live map, chat and MitNight. Author of A come Armatura (2014) and the Commissioner Renato Negri saga for Fratelli Frilli: Milano disillusa (2017), Milano sottozero (2018), Milano vertigo (2021). He also contributed a story to Quattro volte Natale (Todaro, 2020).
 
 ## Professional focus
 
@@ -27,6 +27,10 @@ Oscar Logoteta is a Milan-based CIO and head of operations, born 13 April 1983. 
 4. Writing — novels and stories set in Milan; plot, pace, characters.
 
 Career span: 15+ years leading digital transformation across media, education and enterprise platforms. Degree in Communication Sciences (Scienze della Comunicazione).
+
+## mitcamper
+
+Founder and sole builder, end-to-end. mitcamper matches families who travel by motorhome, campervan or caravan on affinity rather than chance: 17 weighted indices in three dimensions (family life, worldview, free time), a percentage score, direct chat, a live map of compatible families, and MitNight (stopover areas, parking and campsites in Italy, with services, photos and reviews). 400+ families. Languages: Italian, English, French, Spanish, German. Works across Europe. Free to join. https://www.mitcamper.com
 
 ## Books (facts)
 
