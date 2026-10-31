@@ -51,8 +51,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/site.css?v=202610301131">
-  <link rel="stylesheet" href="css/book-open.css?v=202610301131">
+  <link rel="stylesheet" href="css/site.css?v=202610311352">
+  <link rel="stylesheet" href="css/book-open.css?v=202610311352">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -516,7 +516,7 @@
     <ul class="nav-list">
       <li><a href="#about" data-i18n="navAbout">Chi sono</a></li>
       <li><a href="#focus" data-i18n="navFocus">Focus</a></li>
-      <li><a href="#mitcamper" class="nav-mark">mitcamper</a></li>
+      <li><a href="#mitcamper" data-i18n="navProjects">Progetti</a></li>
       <li><a href="#books" data-i18n="navBooks">Libri</a></li>
       <li><a href="#contact" data-i18n="navContact">Contatti</a></li>
     </ul>
@@ -626,8 +626,11 @@
 
     <section class="mc" id="mitcamper">
       <div class="mc-film">
-        <img src="images/mitcamper/sosta.webp" alt="Due famiglie camperiste si incontrano in sosta, mentre i bambini giocano sul prato" width="1600" height="1067" loading="lazy">
+        <div class="mc-film-media">
+          <img src="images/mitcamper/sosta.webp" alt="Due famiglie camperiste si incontrano in sosta, mentre i bambini giocano sul prato" width="1600" height="1067" loading="lazy">
+        </div>
         <div class="mc-film-shade" aria-hidden="true"></div>
+        <div class="mc-film-veil" aria-hidden="true"></div>
         <div class="mc-film-copy">
           <p class="mc-kicker" data-i18n="mcKicker">Founder</p>
           <h2 class="mc-title">
@@ -680,19 +683,19 @@
 
           <dl class="mc-metrics reveal">
             <div>
-              <dt>400+</dt>
+              <dt data-count="400" data-suffix="+">400+</dt>
               <dd data-i18n="mcStat1l">Famiglie</dd>
             </div>
             <div>
-              <dt>17</dt>
+              <dt data-count="17">17</dt>
               <dd data-i18n="mcStat2l">Indici di affinità</dd>
             </div>
             <div>
-              <dt>5</dt>
+              <dt data-count="5">5</dt>
               <dd data-i18n="mcStat3l">Lingue</dd>
             </div>
             <div>
-              <dt>1</dt>
+              <dt data-count="1">1</dt>
               <dd data-i18n="mcStat4l">Founder, end-to-end</dd>
             </div>
           </dl>
@@ -838,7 +841,7 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=202610301131" defer></script>
-  <script src="js/book-open.js?v=202610301131" defer></script>
+  <script src="js/site.js?v=202610311352" defer></script>
+  <script src="js/book-open.js?v=202610311352" defer></script>
 </body>
 </html>

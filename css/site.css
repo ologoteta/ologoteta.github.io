@@ -119,12 +119,6 @@ body.is-menu-open .wordmark {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.nav-list a.nav-mark {
-  text-transform: none;
-  letter-spacing: 0.01em;
-  font-weight: 600;
-}
-
 .lang-switch {
   display: flex;
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -1341,8 +1335,10 @@ body.is-menu-open .nav-toggle {
 }
 
 .mc-film {
-  position: relative;
-  min-height: min(88svh, 52rem);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100svh;
   display: grid;
   align-items: end;
   color: #fff;
@@ -1350,7 +1346,15 @@ body.is-menu-open .nav-toggle {
   background: #140e0a;
 }
 
-.mc-film > img {
+.mc-film-media {
+  position: absolute;
+  inset: -12% 0;
+  z-index: 0;
+  transform: scale(1.08);
+  will-change: transform;
+}
+
+.mc-film-media img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1362,14 +1366,25 @@ body.is-menu-open .nav-toggle {
 .mc-film-shade {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     linear-gradient(102deg, rgba(16, 9, 5, 0.88) 0%, rgba(16, 9, 5, 0.42) 42%, rgba(16, 9, 5, 0.12) 100%),
     linear-gradient(to top, rgba(16, 9, 5, 0.9) 0%, rgba(16, 9, 5, 0.28) 46%, rgba(16, 9, 5, 0.22) 100%);
 }
 
+.mc-film-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #140e0a;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .mc-film-copy {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  will-change: transform, opacity;
   width: 100%;
   max-width: var(--max);
   margin: 0 auto;
@@ -1405,11 +1420,12 @@ body.is-menu-open .nav-toggle {
 .mc-sheet {
   position: relative;
   z-index: 2;
-  margin-top: -2.75rem;
+  margin-top: -3.5rem;
   background:
     radial-gradient(ellipse 55% 40% at 100% 0%, rgba(255, 118, 1, 0.14), transparent 55%),
     #f6f1e8;
   border-radius: 1.75rem 1.75rem 0 0;
+  box-shadow: 0 -28px 70px rgba(20, 14, 10, 0.35);
   padding: clamp(2.4rem, 5vw, 3.6rem) 0 clamp(4.5rem, 9vw, 6.5rem);
 }
 
@@ -1458,9 +1474,27 @@ body.is-menu-open .nav-toggle {
 }
 
 .mc-goals li {
+  position: relative;
   border-top: 1px solid rgba(26, 18, 12, 0.16);
   padding-top: 1rem;
 }
+
+.mc-goals li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 2px;
+  width: 0;
+  background: #ff7601;
+  transition: width 0.95s var(--ease);
+}
+
+.mc-goals li.is-visible::before { width: 100%; }
+.mc-goals li:nth-child(2) { transition-delay: 0.12s; }
+.mc-goals li:nth-child(3) { transition-delay: 0.24s; }
+.mc-goals li:nth-child(2)::before { transition-delay: 0.18s; }
+.mc-goals li:nth-child(3)::before { transition-delay: 0.34s; }
 
 .mc-goals span {
   font-family: var(--font-display);
@@ -1493,7 +1527,10 @@ body.is-menu-open .nav-toggle {
   margin-top: clamp(2.6rem, 6vw, 4.2rem);
 }
 
-.mc-stills figure { margin: 0; }
+.mc-stills figure {
+  margin: 0;
+  overflow: hidden;
+}
 
 .mc-stills figure:first-child { margin-top: 2.75rem; }
 
@@ -1502,7 +1539,17 @@ body.is-menu-open .nav-toggle {
   height: auto;
   aspect-ratio: 16 / 11;
   object-fit: cover;
+  transform: scale(1.14);
+  clip-path: inset(16% 0 18% 0);
+  transition: transform 1.35s var(--ease), clip-path 1.15s var(--ease);
 }
+
+.mc-stills figure.is-visible img {
+  transform: scale(1);
+  clip-path: inset(0);
+}
+
+.mc-stills figure:nth-child(2) img { transition-delay: 0.16s; }
 
 .mc-still-score { position: relative; }
 
@@ -1522,6 +1569,14 @@ body.is-menu-open .nav-toggle {
   background: rgba(246, 241, 232, 0.94);
   color: #1a120c;
   backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease) 0.4s, transform 0.7s var(--ease) 0.4s;
+}
+
+.mc-still-score.is-visible .mc-score {
+  opacity: 1;
+  transform: none;
 }
 
 .mc-score strong {
@@ -1589,7 +1644,7 @@ body.is-menu-open .nav-toggle {
 }
 
 @media (max-width: 860px) {
-  .mc-film { min-height: 78svh; }
+  .mc-film { height: 100svh; }
   .mc-wordmark { width: min(86vw, 20rem); }
   .mc-film-lead { max-width: 14ch; font-size: 1.65rem; }
   .mc-sheet {
@@ -1603,4 +1658,17 @@ body.is-menu-open .nav-toggle {
   .mc-stills figure:first-child { margin-top: 0; }
   .mc-metrics { grid-template-columns: 1fr 1fr; }
   .mc-score { bottom: 2.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-film {
+    position: relative;
+    height: auto;
+    min-height: min(88svh, 52rem);
+  }
+  .mc-film-media { transform: none; }
+  .mc-film-veil { opacity: 0; }
+  .mc-stills img { transform: none; clip-path: none; transition: none; }
+  .mc-score { opacity: 1; transform: none; transition: none; }
+  .mc-goals li::before { width: 100%; transition: none; }
 }

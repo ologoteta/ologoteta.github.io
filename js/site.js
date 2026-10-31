@@ -10,6 +10,7 @@
       menuAria: "Apri o chiudi il menu",
       navAbout: "Chi sono",
       navFocus: "Focus",
+      navProjects: "Progetti",
       navBooks: "Libri",
       navContact: "Contatti",
       heroKicker: "Milano",
@@ -119,6 +120,7 @@
       menuAria: "Open or close menu",
       navAbout: "About",
       navFocus: "Focus",
+      navProjects: "Projects",
       navBooks: "Books",
       navContact: "Contact",
       heroKicker: "Milan",
@@ -509,6 +511,73 @@
     }
   }
 
+  function initMitcamper() {
+    const section = document.getElementById("mitcamper");
+    if (!section) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const media = section.querySelector(".mc-film-media");
+    const copy = section.querySelector(".mc-film-copy");
+    const veil = section.querySelector(".mc-film-veil");
+
+    if (!reduce && media) {
+      let ticking = false;
+      const paint = () => {
+        ticking = false;
+        const rect = section.getBoundingClientRect();
+        const view = window.innerHeight || 1;
+        const p = Math.min(1, Math.max(0, -rect.top / (view * 0.92)));
+        media.style.transform = `scale(${1.08 + p * 0.16}) translate3d(0, ${p * 7}%, 0)`;
+        if (copy) {
+          copy.style.transform = `translate3d(0, ${p * -56}px, 0)`;
+          copy.style.opacity = String(Math.max(0, 1 - p * 1.35));
+        }
+        if (veil) veil.style.opacity = String(p * 0.62);
+      };
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(paint);
+        },
+        { passive: true }
+      );
+      paint();
+    }
+
+    const nums = section.querySelectorAll("[data-count]");
+    if (!nums.length || reduce) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = Number(el.getAttribute("data-count"));
+          const suffix = el.getAttribute("data-suffix") || "";
+          const delay = Number(el.getAttribute("data-delay") || 0);
+          const startAt = performance.now() + delay;
+          const dur = 1200;
+          const tick = (now) => {
+            const t = Math.min(1, Math.max(0, (now - startAt) / dur));
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          io.unobserve(el);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    nums.forEach((el, i) => {
+      el.setAttribute("data-delay", String(i * 90));
+      io.observe(el);
+    });
+  }
+
   function initSmoothAnchors() {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (e) => {
@@ -528,6 +597,7 @@
     initHeader();
     initReveal();
     initHero();
+    initMitcamper();
     initBooksRail();
     initEmail();
     initSignalCard();
